@@ -172,7 +172,7 @@
 					<div class="row">
 						<ul class="nav nav-tabs">
 							<li class="active"><a href="#">YOU</a></li>
-							<li><a href="following">FOLLOWING</a></li>
+							<li><a href="following.jsp">FOLLOWING</a></li>
 						</ul>
 					</div>
 					<div class="row">
