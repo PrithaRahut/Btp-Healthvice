@@ -39,7 +39,7 @@ public class TestimonialEntry extends HttpServlet{
 		test.setAddInfo(addInfo);
 		test.setUserEmail(user.getEmail());
 		test.setPatientEmail(email);
-		
+		test.setLastUpdatedAt(System.currentTimeMillis());
 		Database.addTestimonial(test);
 		
 		response.sendRedirect("testimonial.jsp");

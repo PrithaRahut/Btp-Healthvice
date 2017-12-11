@@ -21,8 +21,8 @@ public class UpvoteDownvote extends HttpServlet{
 			response.sendRedirect("login.jsp");
 		}else{
 			String tid = request.getParameter("testimonialId");
-			String upvote = request.getParameter("upvote");
-			String downvote = request.getParameter("downvote");
+			String upvote = request.getParameter("likedByUser");
+			String downvote = request.getParameter("disLikedByUser");
 			
 			Testimonial t = Database.getTestimonialById(Long.parseLong(tid));
 			if(upvote != null){

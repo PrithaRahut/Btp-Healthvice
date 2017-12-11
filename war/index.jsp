@@ -455,8 +455,10 @@
                 <h1>Check how it works, Hit the Button</h1>
             </div>
             <div class="col-xs-6 column2_video">
-                <!--<iframe width="100%" src="https://www.youtube.com/watch?v=Jijt-hP1jxA" allowfullscreen></iframe>-->
-                <embed src="https://www.youtube.com/embed/F9Bo89m2f6g" allowfullscreen="true" width="425" height="344">
+                <!-- <embed src="https://www.youtube.com/embed/F9Bo89m2f6g" allowfullscreen="true" width="425" height="344">-->
+                <video width="400" height="400" controls>
+                	<source src="./resources/img/BTP.mp4" type="video/mp4">
+                </video>
             </div>
         </div>
     </div>

@@ -26,7 +26,7 @@ public class LoginUser extends HttpServlet{
 			msg = "Successfully logged in!";
 			
 			request.setAttribute("msg", msg);
-			RequestDispatcher req = request.getRequestDispatcher("index.jsp"); //Redirect to page where user was initially
+			RequestDispatcher req = request.getRequestDispatcher("testimonial.jsp"); //Redirect to page where user was initially
 			req.forward(request, response);
 			System.out.println("Successfully logged in!");
 		}else{

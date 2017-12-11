@@ -15,6 +15,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="./resources/css/font-awesome.min.css">
   <link rel="stylesheet" href="./resources/css/style_login1.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
  /*navbar*/
     nav{
@@ -38,14 +40,18 @@
     }
     .navbar-right{
         margin-right: 5%;
+        font-size: 13px;
+        font-weight: bold;
+        font-family: 'Open Sans', Sans-serif;
     }
     .navbar-default .navbar-nav > li > a {
         color: #247ba0;
     }
     .nav > li > a{
         padding: 10px 10px;
-        font-size: 15px;
+        font-size: 13px;
         font-weight: bold;
+        font-family: 'Open Sans', Sans-serif;
     }
     .btn-default{
         background-color: #247ba0;

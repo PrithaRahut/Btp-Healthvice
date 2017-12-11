@@ -72,6 +72,14 @@ public class Database {
 		return list;
 		
 	}
+	public static List<Testimonial> getRecentFiftyTestimonial(){
+		List<Testimonial> list = OfyService.ofy().load().type(Testimonial.class).order("-lastUpdatedAt").limit(50).list();
+		return list;
+	}
+	public static List<Testimonial> getTestimonialLikedByUser(String userId){
+		List<Testimonial> list = OfyService.ofy().load().type(Testimonial.class).filter("userUpvote", userId).limit(50).list();
+		return list;
+	}
 	public static void addDisease(Disease d){
 		OfyService.ofy().save().entity(d).now();
 	}

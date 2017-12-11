@@ -31,13 +31,18 @@ public class Testimonial implements Serializable{
 	int numOfUpvotes;
 	int numOfDownvotes;
 	int score;
+	Long lastUpdatedAt;
+//	@OnSave
+//	public void onSave(){
+//		this.lastUpdatedAt = System.currentTimeMillis();
+//	}
 	
-//	public long getId() {
-//		return Id;
-//	}
-//	public void setId(long id) {
-//		Id = id;
-//	}
+	public long getId() {
+		return Id;
+	}
+	public void setId(long id) {
+		Id = id;
+	}
 	
 	public String getAge() {
 		return age;
@@ -135,6 +140,12 @@ public class Testimonial implements Serializable{
 	}
 	public void setScore(int score) {
 		this.score = score;
+	}
+	public Long getLastUpdatedAt() {
+		return lastUpdatedAt;
+	}
+	public void setLastUpdatedAt(Long lastUpdatedAt) {
+		this.lastUpdatedAt = lastUpdatedAt;
 	}
 
 }

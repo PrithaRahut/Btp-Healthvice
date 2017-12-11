@@ -1,6 +1,6 @@
 <%@ page import="com.btp.User" %>
 <%
-	User user=(User)request.getSession().getAttribute("user");
+	User u=(User)request.getSession().getAttribute("user");
 %>
 <div class="bs-example">
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -51,7 +51,7 @@
         	</ul>
         </li>
         <li><a href="#testimonial">TESTIMONIAL</a></li>
-        <%if(user == null) {%>
+        <%if(u == null) {%>
         <li><a href="login.jsp">LOGIN</a></li>
         <%}else{ %>
         <li><a href="Logout">LOGOUT</a></li>

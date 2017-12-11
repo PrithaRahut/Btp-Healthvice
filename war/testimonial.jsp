@@ -23,6 +23,8 @@
 <link rel="stylesheet" href="./resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="./resources/css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/css?family=Alice|Monoton|Roboto+Condensed|Stint+Ultra+Expanded|Vast+Shadow" rel="stylesheet"> 
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
 	nav{
     	padding: 1%;
@@ -240,7 +242,7 @@
 								<h4><%=t.getDiseaseName() %></h4>
 								<p><b><%=t.getPathy() %></b></p>
 								<p style="line-height:1.2em; height:3.6em; overflow:hidden;"><%=t.getDetails() %> </p>
-								<p><a href="more"><u>More</u></a></p>
+								<p><a href="testimonialDesc.jsp?testimonialId=<%=t.getId()%>"><u>More</u></a></p>
 							</div>
 						</div>
 					</div>

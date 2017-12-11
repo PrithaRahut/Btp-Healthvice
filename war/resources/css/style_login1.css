@@ -22,7 +22,7 @@ a:hover {
 }
 
 .form {
-  background: #42AEE0;
+  background: #019fe9;
   padding: 40px;
   max-width: 600px;
   margin: 150px auto;
@@ -161,7 +161,7 @@ textarea {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: .1em;
-  background: #70c1b3;
+  background: #1ea18a;
   color: #ffffff;
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
