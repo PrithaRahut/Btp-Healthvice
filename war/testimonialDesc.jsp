@@ -12,20 +12,20 @@
 	System.out.println("In testimonial Description:" + testimonialId);
 	Testimonial t = Database.getTestimonialById(Long.parseLong(testimonialId));
 	System.out.println("In testimonialDesc.jsp:" + t.getDiseaseName());
-	if(t.getUserUpvote().isEmpty() == false){
+	if(t.getUserUpvote() != null && !t.getUserUpvote().isEmpty()){
 		numOfLikes = t.getUserUpvote().size();
 		if(t.getUserUpvote().contains(uu.getEmail()) == true){
 			isLikedByUser = true;
 		}
 	}
-	if(t.getUserDownvote().isEmpty() == false){
+	if(t.getUserDownvote() != null && !t.getUserDownvote().isEmpty()){
 		numOfDislikes = t.getUserDownvote().size();
 		
 		if(t.getUserDownvote().contains(uu.getEmail()) == true){
 			isDislikedByUser = true;
 		}
 	}
-	
+	System.out.println("Processing done till here!");
 	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -110,7 +110,7 @@
     var numOfLikes = <%= numOfLikes %>;
     var numOfDislikes = <%= numOfDislikes %>;
     $("#like-btn").click(function(){
-      $.ajax({url: "http://localhost:8888/UpvoteDownvote?likedByUser=true&tid=" + testimonialId, success: function(result){
+      $.ajax({url: "http://localhost:8888/UpvoteDownvote?likedByUser=true&tid=" + testimonialId, type:"POST", success: function(result){
         if (isLikedByUser) {
           // if the testimonial was earlier liked by user then remove it
           isLikedByUser = false;
@@ -125,7 +125,7 @@
       }});
     });
     $("#dislike-btn").click(function(){
-      $.ajax({url: "http://localhost:8888/UpvoteDownvote?disLikedByUser=true&tid=" + testimonialId, success: function(result){
+      $.ajax({url: "http://localhost:8888/UpvoteDownvote?disLikedByUser=true&tid=" + testimonialId, type:"POST", success: function(result){
         if (isDislikedByUser) {
           // if the testimonial was earlier liked by user then remove it
           isDislikedByUser = false;

@@ -1,6 +1,8 @@
 package com.btp;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -22,7 +24,7 @@ public class Recommendation extends HttpServlet{
 		
 		List<Testimonial> listRecent = Database.getRecentFiftyTestimonial();
 		List<Testimonial> listLiked = Database.getTestimonialLikedByUser(u.getEmail());
-		
+	//	List<Testimonial> listrecom = null;
 		HashMap<String,Integer> diseasesLiked = new HashMap<String,Integer>();
 		HashMap<String,Integer> pathyLiked = new HashMap<String,Integer>();
 		
@@ -38,6 +40,20 @@ public class Recommendation extends HttpServlet{
 				pathyLiked.put(t.getPathy(),1);
 			}
 		}
+		for(Testimonial t : listRecent){
+			if(diseasesLiked.containsKey(t.getDiseaseName()) && pathyLiked.containsKey(t.getPathy())){
+				int score = diseasesLiked.get(t.getDiseaseName())*2 + pathyLiked.get(t.getPathy());
+				t.setScore(score);
+				
+			}
+		}
+		//sort the list on the basis of score assigned
+		Collections.sort(listRecent, new Comparator<Testimonial>() {
+
+	        public int compare(Testimonial t1, Testimonial t2) {
+	            return t2.getScore().compareTo(t1.getScore());
+	        }
+	    });
 		
 		
 	}

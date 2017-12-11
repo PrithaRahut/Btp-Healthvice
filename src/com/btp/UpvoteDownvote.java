@@ -1,6 +1,7 @@
 package com.btp;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 //import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,11 +21,17 @@ public class UpvoteDownvote extends HttpServlet{
 		if(user == null){
 			response.sendRedirect("login.jsp");
 		}else{
-			String tid = request.getParameter("testimonialId");
+			String tid = request.getParameter("tid");
 			String upvote = request.getParameter("likedByUser");
 			String downvote = request.getParameter("disLikedByUser");
 			
 			Testimonial t = Database.getTestimonialById(Long.parseLong(tid));
+			if(t.getUserUpvote() == null){
+				t.setUserUpvote(new ArrayList());
+			}
+			if(t.getUserDownvote() == null){
+				t.setUserDownvote(new ArrayList());
+			}
 			if(upvote != null){
 				if(t.getUserUpvote().contains(user.getEmail()) == true){
 					t.getUserUpvote().remove(user.getEmail());
