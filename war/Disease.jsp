@@ -4,13 +4,21 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.btp.Disease" %>
 <%@ page import="com.btp.Testimonial" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="com.btp.ComparisonOfPathy" %>
 
 <%
 	String val = request.getParameter("val");
-	//System.out.println("Disease 1:" +val);
+	System.out.println("Disease 1:" +val);
 	//log(val);
-	Disease d = Database.getDisease(val);
-	//System.out.println("Disease 2:" +d.getName());
+	Disease d= null;
+	try{
+		d = Database.getDisease(val);
+	}catch(Exception e){
+		
+	}
+	
+	System.out.println("Disease 2:" +d.getName());
 	//log(d.getName());
 	List<Testimonial> list = null;
 	if(d != null){
@@ -19,6 +27,10 @@
 			System.out.println("From testimonial list:" + t.getDiseaseName());
 		}
 	}
+	HashMap<String, Integer> map = ComparisonOfPathy.comparePathyForDisease(d.getName());
+	/* List<HashMap> listmap = ComparisonOfPathy.comparePathyForDisease(d.getName());
+	HashMap<String, Integer> map1 = listmap.get(1);		//mapUpvotes
+	HashMap<String, Integer> map2 = listmap.get(2);		//mapCount */
 	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -30,7 +42,14 @@
 <!--<link rel="stylesheet" href="CSS/style.css">-->
 <link rel="stylesheet" href="./resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="./resources/css/font-awesome.min.css">
-<link href="https://fonts.googleapis.com/css?family=Alice|Monoton|Roboto+Condensed|Stint+Ultra+Expanded|Vast+Shadow" rel="stylesheet"> 
+<link href="//fonts.googleapis.com/css?family=Alice|Monoton|Roboto+Condensed|Stint+Ultra+Expanded|Vast+Shadow" rel="stylesheet"> 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script src="https://www.amcharts.com/lib/3/pie.js"></script>
+<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
 <style>
     nav{
         padding: 1%;
@@ -120,11 +139,19 @@
     .col-xs-4{
         width: 47%;
     }
+    #chartdiv {
+  		width: 100%;
+  		height: 500px;
+	}
 </style>
 
 </head>
 <body>
 <%@ include file="header.jsp" %>
+<%if(d == null) {%>
+	<p>No disease found.</p>
+	
+<% return; } %>
 <div class="content">
     <div class="row" style="margin-top: 9%; margin-bottom: 5%;">
         <div class="col-xs-2 content_column">
@@ -154,6 +181,16 @@
                 <hr>
                 <p><%=d.getCause() %></p>
             </div>
+          <div class="row" id="charts" style="height: 25px;">
+            	<div class = "col-xs-6">
+            		<!-- <h4 >Comparison by no. of testimonials for each pathy</h4> -->
+            		<div id="chartdiv"></div>
+            	</div>
+            	<div class = "col-xs-6">
+            		<!-- <h4>Comparison by no. of testimonials for each pathy</h4> -->
+            		<div id="chartdiv"></div>
+            	</div>
+            </div> 
             <div class="row" id="testimonials"  style="margin-bottom: 5%;">
                 <h1>Latest Testimonials</h1>
                 <hr>
@@ -169,7 +206,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xs-4" style="margin-left: 5%;">
+                    <!--<div class="col-xs-4" style="margin-left: 5%;">
                         <div class="card_testimonial">
                             <div class="text_testimonial">
                                 <h4>Disease Name</h4>
@@ -182,7 +219,7 @@
                     </div>
                 </div> -->
                 <div class="col-xs-8">
-				<%if(list!=null){ %>
+			<%-- 	<%if(list!=null){ %>
 				<%for(Testimonial t:list) {%>
 					<div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
 						<div class="card_testimonial">
@@ -195,8 +232,92 @@
 						</div>
 					</div>
 					<%} %>
-					<%} %>
+					<%} %> --%>
+					<ul class="nav nav-tabs">
+					  <li class="active"><a data-toggle="tab" href="#Homeopathy">Homeopathy</a></li>
+					  <li><a data-toggle="tab" href="#Allopathy">Allopathy</a></li>
+					  <li><a data-toggle="tab" href="#Ayurveda">Ayurveda</a></li>
+					  <li><a data-toggle="tab" href="#Naturopathy">Naturopathy</a></li>
+					</ul>
 					
+					<div class="tab-content">
+					  <div id="Homeopathy" class="tab-pane fade in active">
+					    <%if(list!=null) {%>
+					    	<%for(Testimonial t:list) {%>
+					    		<%if(t.getPathy().equalsIgnoreCase("Homeopathy")){ %>
+					    			<div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
+										<div class="card_testimonial">
+											<div class="text_testimonial">
+												<h4><%=t.getDiseaseName() %></h4>
+												<p><b><%=t.getPathy() %></b></p>
+												<p style="line-height:1.2em; height:3.6em; overflow:hidden;"><%=t.getDetails() %> </p>
+												<p><a href="more"><u>More</u></a></p>
+											</div>
+										</div>
+									</div>
+									    			
+					    		<%} %>
+					    	<%} %>
+					    <%} %>
+					  </div>
+					  <div id="Allopathy" class="tab-pane fade">
+					     <%if(list!=null) {%>
+					    	<%for(Testimonial t:list) {%>
+					    		<%if(t.getPathy().equalsIgnoreCase("Allopathy")){ %>
+					    			<div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
+										<div class="card_testimonial">
+											<div class="text_testimonial">
+												<h4><%=t.getDiseaseName() %></h4>
+												<p><b><%=t.getPathy() %></b></p>
+												<p style="line-height:1.2em; height:3.6em; overflow:hidden;"><%=t.getDetails() %> </p>
+												<p><a href="more"><u>More</u></a></p>
+											</div>
+										</div>
+									</div>
+									    			
+					    		<%} %>
+					    	<%} %>
+					    <%} %>
+					  </div>
+					  <div id="Ayurveda" class="tab-pane fade">
+					     <%if(list!=null) {%>
+					    	<%for(Testimonial t:list) {%>
+					    		<%if(t.getPathy().equalsIgnoreCase("Ayurvedic")){ %>
+					    			<div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
+										<div class="card_testimonial">
+											<div class="text_testimonial">
+												<h4><%=t.getDiseaseName() %></h4>
+												<p><b><%=t.getPathy() %></b></p>
+												<p style="line-height:1.2em; height:3.6em; overflow:hidden;"><%=t.getDetails() %> </p>
+												<p><a href="more"><u>More</u></a></p>
+											</div>
+										</div>
+									</div>
+									    			
+					    		<%} %>
+					    	<%} %>
+					    <%} %>
+					  </div>
+					  <div id="Naturopathy" class="tab-pane fade">
+					    <%if(list!=null) {%>
+					    	<%for(Testimonial t:list) {%>
+					    		<%if(t.getPathy().equalsIgnoreCase("Naturopathy")){ %>
+					    			<div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
+										<div class="card_testimonial">
+											<div class="text_testimonial">
+												<h4><%=t.getDiseaseName() %></h4>
+												<p><b><%=t.getPathy() %></b></p>
+												<p style="line-height:1.2em; height:3.6em; overflow:hidden;"><%=t.getDetails() %> </p>
+												<p><a href="more"><u>More</u></a></p>
+											</div>
+										</div>
+									</div>
+									    			
+					    		<%} %>
+					    	<%} %>
+					    <%} %>
+					  </div>
+					</div>
 				</div>
                 
             </div>
@@ -205,4 +326,61 @@
 </div>
 
 </body>
+<script type="text/javascript">
+var chart = AmCharts.makeChart( "chartdiv", {
+	  "type": "pie",
+	  "theme": "light",
+	  "dataProvider": [ {
+	    "pathy": "Homeopathy",
+	    "count": <%=map.get("Homeopathy")%>
+	  }, {
+	    "pathy": "Allopathy",
+	    "count": <%=map.get("Allopathy")%>
+	  }, {
+	    "pathy": "Ayurveda",
+	    "count": <%=map.get("Ayurvedic")%>
+	  } ],
+	  "valueField": "count",
+	  "titleField": "pathy",
+	   "balloon":{
+	   "fixedPosition":true
+	  },
+	  "export": {
+	    "enabled": true
+	  }
+	} );
+setInterval(function(){
+    var element = document.getElementById('chartdiv');
+    if(element) {
+      var anchor = element.getElementsByTagName('a')[0];
+      if(anchor) {
+        anchor.style.display = 'none';
+      }
+    }
+  }, 1000, 5);
+	
+<%-- var chart1 = AmCharts.makeChart( "chartdiv1", {
+	  "type": "pie",
+	  "theme": "light",
+	  "dataProvider": [ {
+	    "pathy": "Homeopathy",
+	    "count": <%=map1.get("Homeopathy")%>
+	  }, {
+	    "pathy": "Allopathy",
+	    "count": <%=map1.get("Allopathy")%>
+	  }, {
+	    "pathy": "Ayurveda",
+	    "count": <%=map1.get("Ayurvedic")%>
+	  } ],
+	  "valueField": "count",
+	  "titleField": "pathy",
+	   "balloon":{
+	   "fixedPosition":true
+	  },
+	  "export": {
+	    "enabled": true
+	  }
+	} ); --%>
+
+</script>
 </html>

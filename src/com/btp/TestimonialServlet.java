@@ -17,8 +17,13 @@ public class TestimonialServlet extends HttpServlet{
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		User user=(User)request.getSession().getAttribute("user");
+		boolean openModal;
 		if(user == null){
-			response.sendRedirect("login.jsp");
+			openModal = true;
+			request.setAttribute("isLoggedIn", openModal);
+			RequestDispatcher dispatch=request.getRequestDispatcher("index.jsp");
+			dispatch.forward(request,response);
+			//response.sendRedirect("login.jsp");
 		}else{
 			//response.sendRedirect("testimonial.jsp");
 			request.setAttribute("user", user);

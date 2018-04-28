@@ -1,0 +1,146 @@
+@import url('https://rsms.me/inter/inter-ui.css');
+
+.brand-logo{
+	margin-left: 25px;
+}
+nav {
+	background-color: #00bfa5;
+	/*box-shadow: 0px 0px;*/
+	font-family: 'Inter UI', sans-serif;
+	font-size: 18px;
+}
+.tabs .indicator{
+	background-color: #00bfa5;
+}
+.tabs .tab a:hover {
+	background-color: #a7ffeb;
+	color: #00bfa5;
+}
+.tabs .tab a {
+	color: #00bfa5;
+}
+.tabs .tab a.active{
+	background-color: #b2ebf2;
+	color: #00bfa5;
+}
+.tabs .tab a.active:focus{
+	background-color: #b2ebf2;
+}
+#landing{
+	position: relative;
+	background-color: #1de9b6;
+	color : #ffffff;
+	height: 650px;
+}
+#landing-content{
+	text-align: center;
+	/*margin-top: -35px;*/
+	*color : #ffffff;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%)
+}
+/*#landing-content h2{
+	line-height: 70%;
+}*/
+.learnMoreButton {
+	border: 3px solid #ffffff;
+	height: 60px;
+	width: 240px;
+	text-align: center;
+	color: #ffffff;
+	padding: 0px;
+	padding-top: 6px;
+	font-size: 20px;
+}
+#aboutus{
+	position: relative;
+	min-height: 650px;
+	margin: 50px;
+}
+#aboutus p{
+	font-size: 20px;
+}
+#share{
+	position: relative;
+	background-color: #1de9b6;
+	color : #ffffff;
+	height: 400px;
+}
+#share-content{
+	text-align: center;
+	/*margin-top: -35px;*/
+	*color : #ffffff;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%)
+}
+.addTestimonialbtn {
+	border: 3px solid #ffffff;
+	color: #ffffff;
+	font-size: 25px;
+	height: 70px;
+	width: 270px;
+	text-align: center;
+	padding-top: 8px;
+}
+#recent-story {
+	height: 500px;
+	margin: 50px;
+}
+.story-content {
+	padding-top: 30px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+#footer {
+	position: relative;
+	background-color: #1de9b6;
+	color : #ffffff;
+	height: 400px;
+	margin-bottom: -40px;
+}
+.nooutline:focus {
+	outline: none;
+}
+.story-section {
+	padding: 10px;
+	border: 1px solid grey;
+	border-radius: 9px;
+	height: 320px;
+	width: 320px;
+	margin: auto;
+}
+.story-section:hover {
+	border-color: #1de9b6;
+}
+/* Profile Page*/
+.tabs1 .indicator{
+	background-color: #00bfa5;
+}
+.tabs1 .tab a:hover {
+	background-color: #a7ffeb;
+	color: #00bfa5;
+}
+.tabs1 .tab a {
+	color: #00bfa5;
+}
+.tabs1 .tab a.active{
+	background-color: #b2ebf2;
+	color: #00bfa5;
+}
+.tabs1 .tab a.active:focus{
+	background-color: #b2ebf2;
+}
+/*#nav-mobile {
+	display: inline-block;
+}
+
+#nav-mobile li{
+	margin-left: 150px;
+	display: inline-block;
+   	text-align:center; 
+
+}*/

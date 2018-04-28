@@ -138,7 +138,8 @@ public class IndexingWrapper {
 	        .addField(Field.newBuilder().setName("diseaseName").setText(testimonial.getDiseaseName()))
 	        .addField(Field.newBuilder().setName("userEmail").setText(testimonial.getUserEmail()))
 	        .addField(Field.newBuilder().setName("patientEmail").setText(testimonial.getPatientEmail()))
-	        .addField(Field.newBuilder().setName("pathy").setText(testimonial.getPathy()));
+	        .addField(Field.newBuilder().setName("pathy").setText(testimonial.getPathy()))
+	        .addField(Field.newBuilder().setName("year").setNumber(testimonial.getYear()));
 	    
 	    if(user!=null && user.getFirstName()!=null){
 	    	docBuilder.addField(Field.newBuilder().setName("userName").setText(user.getFirstName()));

@@ -17,9 +17,23 @@ public class User implements Serializable{
 	private String email;
 	private String passWord;
 	private String number;
+	private String dob;
+	private String gender;
 	
 	
 	
+	public String getDob() {
+		return dob;
+	}
+	public void setDob(String dob) {
+		this.dob = dob;
+	}
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
 	public String getEmail() {
 		return email;
 	}

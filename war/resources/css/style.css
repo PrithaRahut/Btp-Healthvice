@@ -96,7 +96,7 @@
         color: #247ba0 !important;
         line-height: 33px;
     }
-    hr {
+    .hr_line{
         display: inline-block;
         margin-top: 0px !important;
         margin-bottom: 0px !important;

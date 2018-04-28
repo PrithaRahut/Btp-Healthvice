@@ -9,6 +9,7 @@ public class OfyService {
 		factory().register(User.class);
 		factory().register(Testimonial.class);
 		factory().register(Disease.class);
+		factory().register(ImageFile.class);
 	}
 	public static Objectify ofy(){
 		return ObjectifyService.ofy();

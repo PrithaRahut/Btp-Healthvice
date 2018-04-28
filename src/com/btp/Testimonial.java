@@ -1,6 +1,7 @@
 package com.btp;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.List;
 
 import com.googlecode.objectify.annotation.*;
@@ -25,18 +26,31 @@ public class Testimonial implements Serializable{
 	String addInfo;
 	String name;
 	String contact;
-	String patientEmail;	//Email id of patient
+	String patientEmail;//Email id of patient
+	@Index
 	List<String> userUpvote;
+	@Index
 	List<String> userDownvote;
 	int numOfUpvotes;
 	int numOfDownvotes;
 	int score;
-	Long lastUpdatedAt;
+	@Index
+	long lastUpdatedAt;
+	int year;
+	//long timestamp;
 //	@OnSave
 //	public void onSave(){
 //		this.lastUpdatedAt = System.currentTimeMillis();
 //	}
-	
+	public int getYear(){
+		return year;
+	}
+	public void setYear(long lastUpdatedAt) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTimeInMillis(lastUpdatedAt);
+		int year = cal.get(Calendar.YEAR);
+		this.year = year;
+	}
 	public long getId() {
 		return Id;
 	}

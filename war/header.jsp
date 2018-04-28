@@ -1,36 +1,24 @@
 <%@ page import="com.btp.User" %>
 <%
 	User u=(User)request.getSession().getAttribute("user");
+	//String msg=(String)request.getAttribute("msg");
 %>
-<div class="bs-example">
-    <nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="index.jsp">HEALTHVISE</a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <form class="navbar-form navbar-left" action="SearchResult.jsp" method="post">
-        <div class="form-group">
-          <input type="text" class="form-control search" placeholder="Search" id="mySearch" name="searchterm">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="index.jsp">HOME</a></li>
-        <li><a href="#about">ABOUT</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">DISEASES<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="Disease.jsp?val=Artheritis">Artheritis</a></li>
+		<nav>
+			<div class="nav-wrapper" style="box-shadow: 0px 0px 0px;">
+      		<a href="#" class="brand-logo">HEALTHVICE</a>
+      		<ul id="nav-mobile" class="right" style="margin: 0 auto;">
+        		<li><a href="#aboutus">About Us</a></li>
+        		<li><a class='dropdown-trigger nooutline' href="#" data-target='diseaseDropDown'>Diseases</a></li>
+        		<%if(u == null){ %>
+        		<li><a class="modal-trigger" href="#LoginModal">Login</a></li>
+        		<%} else { %>
+        		<li><a href="Logout">Logout</a></li>
+        		<%} %>
+      		</ul>
+    		</div>
+		</nav>
+		<ul id="diseaseDropDown" class='dropdown-content'>
+			<li><a href="Disease.jsp?val=Arthritis">Arthritis</a></li>
             <li><a href="Disease.jsp?val=Asthma">Asthma</a></li>
             <li><a href="Disease.jsp?val=Slip Disc">Slip Disc</a></li>
             <li><a href="Disease.jsp?val=Migraine">Migraine</a></li>
@@ -38,26 +26,110 @@
             <li><a href="Disease.jsp?val=Cough and Cold">Cough and Cold</a></li>
             <li><a href="Disease.jsp?val=Brain Tumour">Brain Tumour</a></li>
             <li><a href="Disease.jsp?val=Gallstones">Gallstones</a></li>
-            <li><a href="Disease.jsp?val=Psoriasis">Diabaties</a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-        	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">TREATMENT<span class="caret"></span></a>
-        	<ul class="dropdown-menu">
-        		<li><a href="#">Allopathy</a></li>
-        		<li><a href="#">Homeopathy</a></li>
-        		<li><a href="#">Ayurveda</a></li>
-        		<li><a href="#">Naturopathy</a></li>
-        	</ul>
-        </li>
-        <li><a href="#testimonial">TESTIMONIAL</a></li>
-        <%if(u == null) {%>
-        <li><a href="login.jsp">LOGIN</a></li>
-        <%}else{ %>
-        <li><a href="Logout">LOGOUT</a></li>
-        <%} %>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-</div>
+            <li><a href="Disease.jsp?val=Psoriasis">Psoriasis</a></li>
+		</ul>
+		<div id="LoginModal" class="modal">
+			<div class="modal-content">
+				<div class="row">
+					<div class="col s12">
+					<ul class="tabs" style="margin-bottom: 8px;">
+      					<li class="tab col s6"><a class="active" href="#Login">Login</a></li>
+      					<li class="tab col s6"><a href="#SignUp">SignUp</a></li>
+      				</ul>
+      				<div id="Login">
+      					<!-- <p>Login Form will be here</p> -->
+      					<form class="col s12" action="/LoginUser" method="post">
+      						<div class="row">
+      							<div class="input-field col s12">
+      								<input type="email" id="email" name="email">
+      								<label for="email">Email</label>
+      							</div>
+      						</div>
+      						<div class="row">
+						        <div class="input-field col s12">
+						          <input id="password" type="password" class="validate" name="password">
+						          <label for="password">Password</label>
+						        </div>
+						    </div>
+						    <%-- <%if(msg != null){ %>
+          						<p><%=msg %></p>
+          					<%} %> --%>
+						    <div class="row">
+						    	<div class="col s4">
+						    		
+						    	</div>
+						    	<div class="col s4" style="border: 2px solid #00bfa5; text-align: center; padding: 0px;">
+						    	 	<button class="waves-effect waves-teal btn-flat" type="submit" name="action" style="color: #00bfa5; text-align: center; width: 100%;">Submit</button>
+						    	</div>
+						    	
+						    </div>
+						    
+      					</form>
+      				</div>
+      				<div id="SignUp">
+      					<!-- <p>SignUp form will be here</p> -->
+      					<form class="col s12" action="/SignupUser" method="post">
+      						<div class="row">
+      							<div class="input-field col s6">
+      								<input type="text" id="fname" name="firstname">
+      								<label for="uname">First Name</label>
+      							</div>
+      							<div class="input-field col s6">
+      								<input type="text" id="lname" name="lastname">
+      								<label for="uname">Last Name</label>
+      							</div>
+      						</div>
+      						<div class="row">
+      							<div class="input-field col s6">
+      								<input type="text" class="datepicker" name="dob">
+      								<label for="dob">Date of Birth</label>
+      								
+      							</div>
+      							<div class="input-field col s6">
+							        <select class="select1" name="gender">
+	      								<option value="gender" disabled selected>Gender</option>
+	      								<option value="male">Male</option>
+	      								<option value="female">Female</option>
+	    							</select>
+						    	</div>
+      						</div>
+      						<div class="row">
+						        <div class="input-field col s6">
+						          <input id="email" type="email" class="validate" name="email">
+						          <label for="email">Email</label>
+						        </div>
+						        <div class="input-field col s6">
+						          <input id="contact" type="text" class="validate" name="number">
+						          <label for="contact">Contact</label>
+						        </div>
+						    </div>
+      						<div class="row">
+						        <div class="input-field col s12">
+						          <input id="password" type="password" class="validate" name="password">
+						          <label for="password">Password</label>
+						        </div>
+						    </div>
+						    <div class="row">
+						        <div class="input-field col s12">
+						          <input id="cpass" type="password" class="validate" name="cpass">
+						          <label for="cpass">Confirm Password</label>
+						        </div>
+						    </div>
+						    <%-- <%if(msg != null){ %>
+          						<p><%=msg %></p>
+          					<%} %> --%>
+						     <div class="row">
+						    	<div class="col s4">
+						    		
+						    	</div>
+						    	<div class="col s4" style="border: 2px solid #00bfa5; text-align: center; padding: 0px;">
+						    	 	<button class="waves-effect waves-teal btn-flat" type="submit" name="action" style="color: #00bfa5; text-align: center; width: 100%;">Submit</button>
+						    	</div>
+						    	
+						    </div>
+      					</form>
+      				</div>
+					</div>
+				</div>
+    		</div>
+		</div>

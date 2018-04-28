@@ -4,14 +4,18 @@
 <%@ page import="com.btp.User" %>
 <%@ page import="com.btp.Database" %>
 <%@ page import="com.btp.Testimonial" %>
+<%@ page import="com.btp.Recommendation" %>
     
 <%
 	User user = (User)request.getSession().getAttribute("user");
 	System.out.println("User logged in now:" + user.getFirstName());
-	List<Testimonial> list = Database.getTestimonialByUser(user.getEmail());
-	for(Testimonial t : list){
+	List<Testimonial> list1 = Database.getTestimonialByUser(user.getEmail());
+	for(Testimonial t : list1){
 		System.out.println(t.getDiseaseName());
 	}
+	//User uu = (User)request.getSession().getAttribute("user");
+	List<Testimonial> list = Recommendation.getLatestTestimonial(request);
+	System.out.println("In following.jsp:" + list.size());
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -19,12 +23,12 @@
 <title>Testimonial.html</title>
 <meta charset="utf-8">
 
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="./resources/css/style.css">
 <link rel="stylesheet" href="./resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="./resources/css/font-awesome.min.css">
-<link href="https://fonts.googleapis.com/css?family=Alice|Monoton|Roboto+Condensed|Stint+Ultra+Expanded|Vast+Shadow" rel="stylesheet"> 
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="//fonts.googleapis.com/css?family=Alice|Monoton|Roboto+Condensed|Stint+Ultra+Expanded|Vast+Shadow" rel="stylesheet"> 
+ <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
 	nav{
     	padding: 1%;
@@ -168,69 +172,120 @@
 						<!-- <p class="desciption">hege ehflw ehwlknw whgwb wghwl wheg gg</p> -->
 					</div>
 				</div>
-				<div class="col-xs-8 testimonial_card">
-					<div class="row">
-						<ul class="nav nav-tabs">
-							<li class="active"><a href="#">YOU</a></li>
-							<li><a href="following.jsp">FOLLOWING</a></li>
-						</ul>
-					</div>
-					<div class="row">
-						<h3 class="testimonial_tagline">Share Your Experiences with us!<h3>
-						<div class="form form_card">
-							<form action="/TestimonialEntry" method="post">
-								<div class="form-group">
-									<label for="name">Name:</label>
-									<input type="text" class="form-control" id="name" placeholder="Enter your Full Name" name="name">
+				<div class="col-xs-8">
+					<ul class="nav nav-tabs">
+					  <li class="active"><a data-toggle="tab" href="#you">YOU</a></li>
+					  <li><a data-toggle="tab" href="#following">Following</a></li>
+					</ul>
+					
+					<div class="tab-content">
+					  <div id="you" class="tab-pane fade in active">
+					  		<div class="row">
+								<h3 class="testimonial_tagline">Share Your Experiences with us!<h3>
+								<div class="form">
+									<form action="/TestimonialEntry" method="post" enctype="multipart/form-data">
+										<div class="form-group">
+											<label for="name">Name:</label>
+											<input type="text" class="form-control" id="name" placeholder="Enter your Full Name" name="name">
+										</div>
+										<div class="form-group">
+											<label for="email">Email*:</label>
+											<input type="text" class="form-control" id="email" placeholder="Enter your Email Address" name="email" required>
+										</div>
+										<div class="form-group">
+											<label for="age">Age*:</label>
+											<input type="text" class="form-control" id="age" placeholder="Enter your age" name="age" required>
+										</div>
+										<div class="form-group">
+											<label for="contact">Contact No:</label>
+											<input type="text" class="form-control" id="contact" placeholder="Enter your contact number" name="contact">
+										</div>
+										<div class="form-group">
+											<label for="name">Sex*:</label></br>
+											<input type="radio" id="gender" name="gender" value="male" checked><span class="gender">&nbsp;Male</span>
+											<input type="radio" id="gender" name="gender" value="Female"><span class="gender">&nbsp;Female</span>
+											<input type="radio" id="gender" name="gender" value="other"><span class="gender">&nbsp;Other</span>
+										</div>
+										<div class="form-group">
+											<label for="diseases">Disease*: &nbsp;&nbsp;</label>
+											<input type="text" class="form-control" id="disease" placeholder="Enter Disease" name="disease">
+											<label for="diseases">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Healthcare Treatments*: &nbsp;&nbsp;</label>
+											<select name="pathy">
+												<option value="Homeopathy">Homeopathy</option>
+												<option value="Allopathy">Allopathy</option>
+												<option value="Ayurvedic">Ayurvedic</option>
+												<option value="others">Others</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label for="Details">Details*:</label>
+											<textarea class="form-control" rows="5" id="details" name="details">
+											</textarea>
+										</div>
+										<div class="form-group">
+											<label for="additional-info">Additional Info:</label>
+											<!-- <textarea class="form-control" rows="5" id="additional-info" name="addInfo">
+											</textarea> -->
+											<input type="file" name="file" id="file" multiple="true">
+										</div>
+										<div class="form-group">
+											   <button type="submit" class="button button-block"/>Submit</button>
+										</div>
+									</form>
 								</div>
-								<div class="form-group">
-									<label for="email">Email*:</label>
-									<input type="text" class="form-control" id="email" placeholder="Enter your Email Address" name="email" required>
+							</div>
+					    	<div class="row" style="margin-bottom: 10%;">
+								<div class="col-xs-4" style="width: 25%;">
 								</div>
-								<div class="form-group">
-									<label for="age">Age*:</label>
-									<input type="text" class="form-control" id="age" placeholder="Enter your age" name="age" required>
+								<div class="col-xs-8">
+								<%if(list!=null){ %>
+								<%for(Testimonial t:list1) {%>
+									<div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
+										<div class="card_testimonial">
+											<div class="text_testimonial">
+												<h4><%=t.getDiseaseName() %></h4>
+												<p><b><%=t.getPathy() %></b></p>
+												<p style="line-height:1.2em; height:3.6em; overflow:hidden;"><%=t.getDetails() %> </p>
+												<p><a href="testimonialDesc.jsp?testimonialId=<%=t.getId()%>"><u>More</u></a></p>
+											</div>
+										</div>
+									</div>
+									<%} %>
+									<%} %>
+									
 								</div>
-								<div class="form-group">
-									<label for="contact">Contact No:</label>
-									<input type="text" class="form-control" id="contact" placeholder="Enter your contact number" name="contact">
-								</div>
-								<div class="form-group">
-									<label for="name">Sex*:</label></br>
-									<input type="radio" id="gender" name="gender" value="male" checked><span class="gender">&nbsp;Male</span>
-									<input type="radio" id="gender" name="gender" value="Female"><span class="gender">&nbsp;Female</span>
-									<input type="radio" id="gender" name="gender" value="other"><span class="gender">&nbsp;Other</span>
-								</div>
-								<div class="form-group">
-									<label for="diseases">Disease*: &nbsp;&nbsp;</label>
-									<input type="text" class="form-control" id="disease" placeholder="Enter Disease" name="disease">
-									<label for="diseases">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Healthcare Treatments*: &nbsp;&nbsp;</label>
-									<select name="pathy">
-										<option value="Homeopathy">Homeopathy</option>
-										<option value="Allopathy">Allopathy</option>
-										<option value="Ayurvedic">Ayurvedic</option>
-										<option value="others">Others</option>
-									</select>
-								</div>
-								<div class="form-group">
-									<label for="Details">Details*:</label>
-									<textarea class="form-control" rows="5" id="details" name="details">
-									</textarea>
-								</div>
-								<div class="form-group">
-									<label for="additional-info">Additional Info:</label>
-									<textarea class="form-control" rows="5" id="additional-info" name="addInfo">
-									</textarea>
-								</div>
-								<div class="form-group">
-									   <button type="submit" class="button button-block"/>Submit</button>
-								</div>
-							</form>
+							</div>
+					  </div>
+					  <div id="following" class="tab-pane fade">
+					    <div class="row" style="margin-bottom: 10%; margin-top: 7%;">
+							<!-- <div class="col-xs-4" style="width: 25%;">
+							</div> -->
+							<div class="col-xs-8">
+							<%if(list!=null && !list.isEmpty()){ %>
+								<%for(Testimonial t:list) {%>
+									<div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
+										<div class="card_testimonial">
+											<div class="text_testimonial">
+												<h4><%=t.getDiseaseName() %></h4>
+												<p><b><%=t.getPathy() %></b></p>
+												<p><b><%=t.getUserEmail() %></b></p>
+												<p style="line-height:1.2em; height:3.6em; overflow:hidden;"><%=t.getDetails() %> </p>
+												<p><a href="testimonialDesc.jsp?testimonialId=<%=t.getId()%>"><u>More</u></a></p>
+											</div>
+										</div>
+									</div>
+								<%} %>
+							<%} else { %>
+								<p>No recent testimonials found!</p>
+							<%} %>
+								
+							</div>
 						</div>
+					  </div>
 					</div>
 				</div>
 			</div>
-			<div class="row" style="margin-bottom: 10%;">
+			<%-- <div class="row" style="margin-bottom: 10%;">
 				<div class="col-xs-4" style="width: 25%;">
 				</div>
 				<div class="col-xs-8">
@@ -250,7 +305,7 @@
 					<%} %>
 					
 				</div>
-			</div>
+			</div> --%>
 		</div>
 	</div>
 	</section>

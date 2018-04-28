@@ -25,12 +25,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Search Result</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/font-awesome.min.css">
-<link href="https://fonts.googleapis.com/css?family=PT+Serif|Bitter|Bubblegum+Sans|Open+Sans" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=PT+Serif|Bitter|Bubblegum+Sans|Open+Sans" rel="stylesheet">
 <link rel="stylesheet" href="./resources/css/style.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <style>
 .col-xs-12{
   width: 85%;

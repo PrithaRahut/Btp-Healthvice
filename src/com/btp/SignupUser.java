@@ -18,6 +18,8 @@ public class SignupUser extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String fname = request.getParameter("firstname");
 		String lname = request.getParameter("lastname");
+		String dob = request.getParameter("dob");
+		String gender = request.getParameter("gender");
 		String email = request.getParameter("email");
 		String pwd = request.getParameter("password");
 		String cpwd = request.getParameter("cpass");
@@ -30,6 +32,8 @@ public class SignupUser extends HttpServlet{
 			User u = new User();
 			u.setFirstName(fname);
 			u.setLastName(lname);
+			u.setDob(dob);
+			u.setGender(gender);
 			u.setEmail(email);
 			u.setPassWord(pwd);
 			u.setNumber(number);
@@ -45,6 +49,7 @@ public class SignupUser extends HttpServlet{
 			
 		}else{
 			msg = "Password do not match";
+			System.out.println("Password do not match");
 		}
 		
 		request.setAttribute("msg", msg);
