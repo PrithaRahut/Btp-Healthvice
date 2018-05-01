@@ -64,6 +64,7 @@ public class Database {
 		return list;
 	}
 	public static List<Testimonial> getTestimonialByDisease(String diseaseName){
+		//System.out.println("here "+ diseaseName);
 		List<Testimonial> list= OfyService.ofy().load()
 				.type(Testimonial.class)
 				.filter("diseaseName",diseaseName)

@@ -1,6 +1,8 @@
 <%@ page import="com.btp.User" %>
 <%
 	User u=(User)request.getSession().getAttribute("user");
+	Boolean incorrectInfo = Boolean.parseBoolean((String)request.getAttribute("incorrectInfo"));
+	Boolean pwdUnmatch = Boolean.parseBoolean((String)request.getAttribute("pwdUnmatch"));
 	//String msg=(String)request.getAttribute("msg");
 %>
 		<nav>
@@ -40,6 +42,9 @@
       					<!-- <p>Login Form will be here</p> -->
       					<form class="col s12" action="/LoginUser" method="post">
       						<div class="row">
+      						    <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
+      						</div>
+      						<div class="row">
       							<div class="input-field col s12">
       								<input type="email" id="email" name="email">
       								<label for="email">Email</label>
@@ -51,9 +56,10 @@
 						          <label for="password">Password</label>
 						        </div>
 						    </div>
-						    <%-- <%if(msg != null){ %>
-          						<p><%=msg %></p>
-          					<%} %> --%>
+						   <%if(incorrectInfo) {%>
+						   		<% System.out.println("isLoggedin is false"); %>
+						   		<p style="color: red;">Incorrect Email or password!</p>
+						   <%} %>
 						    <div class="row">
 						    	<div class="col s4">
 						    		
@@ -86,7 +92,7 @@
       								
       							</div>
       							<div class="input-field col s6">
-							        <select class="select1" name="gender">
+							        <select class="select" name="gender">
 	      								<option value="gender" disabled selected>Gender</option>
 	      								<option value="male">Male</option>
 	      								<option value="female">Female</option>
@@ -115,9 +121,9 @@
 						          <label for="cpass">Confirm Password</label>
 						        </div>
 						    </div>
-						    <%-- <%if(msg != null){ %>
-          						<p><%=msg %></p>
-          					<%} %> --%>
+						    <%if(pwdUnmatch){ %>
+          						<p style="color:red;">Passwords do not match</p>
+          					<%} %>
 						     <div class="row">
 						    	<div class="col s4">
 						    		

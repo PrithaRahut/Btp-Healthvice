@@ -21,12 +21,12 @@ public class Testimonial implements Serializable{
 	@Index
 	String diseaseName;
 	String pathy;
-	String treatment;
+	//String treatment;
 	String details;
-	String addInfo;
 	String name;
 	String contact;
 	String patientEmail;//Email id of patient
+	Long imgId;
 	@Index
 	List<String> userUpvote;
 	@Index
@@ -82,12 +82,6 @@ public class Testimonial implements Serializable{
 	public void setPathy(String pathy) {
 		this.pathy = pathy;
 	}
-	public String getTreatment() {
-		return treatment;
-	}
-	public void setTreatment(String treatment) {
-		this.treatment = treatment;
-	}
 	public String getDetails() {
 		return details;
 	}
@@ -107,12 +101,6 @@ public class Testimonial implements Serializable{
 		this.contact = contact;
 	}
 	
-	public String getAddInfo() {
-		return addInfo;
-	}
-	public void setAddInfo(String addInfo) {
-		this.addInfo = addInfo;
-	}
 	public String getUserEmail() {
 		return userEmail;
 	}
@@ -124,6 +112,13 @@ public class Testimonial implements Serializable{
 	}
 	public void setPatientEmail(String patientEmail) {
 		this.patientEmail = patientEmail;
+	}
+	public Long getImgId() {
+		return imgId;
+	}
+	public void setImageId(Long imgId) {
+		System.out.println("setting image id\n");
+		this.imgId = imgId;
 	}
 	public List<String> getUserUpvote() {
 		return userUpvote;

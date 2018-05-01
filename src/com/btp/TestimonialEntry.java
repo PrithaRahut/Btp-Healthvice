@@ -17,6 +17,8 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 
+import com.googlecode.objectify.Key;
+
 
 public class TestimonialEntry extends HttpServlet{
 	/**
@@ -26,59 +28,86 @@ public class TestimonialEntry extends HttpServlet{
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		User user=(User)request.getSession().getAttribute("user");
-//		String name = request.getParameter("name");
-//		String age = request.getParameter("age");
-//		String sex = request.getParameter("gender");
-//		String disease = request.getParameter("disease");
-//		String details = request.getParameter("details");
-//		String addInfo = request.getParameter("addInfo");
-//		String pathy = request.getParameter("pathy");
-//		String contactNo = request.getParameter("contact");
-//		String email = request.getParameter("email");
 		
 		//System.out.println("In testimonial Entry servlet:" + details);
 		
 		 //List<Part> fileParts = request.getParts().stream().filter(part -> "file".equals(part.getName())).collect(Collectors.toList());
 		
 //		
-//		Testimonial test = new Testimonial();
-//		test.setName(name);
-//		test.setAge(age);
-//		test.setSex(sex);
-//		test.setDiseaseName(disease);
-//		//test.setTreatment(pathy);
-//		test.setPathy(pathy);
-//		test.setDetails(details);
-//		test.setContact(contactNo);
-//		test.setAddInfo(addInfo);
-//		test.setUserEmail(user.getEmail());
-//		test.setPatientEmail(email);
-//		test.setLastUpdatedAt(System.currentTimeMillis());
-//		test.setYear(System.currentTimeMillis());
-//		Database.addTestimonial(test);
 //		
 //		response.sendRedirect("testimonial.jsp");
 		
 		try{
+			String name = null;
+			String age = null;
+			String sex = null;
+			String disease = null;
+			String details = null;
+			String pathy = null;
+			String contactNo = null;
+			String email = null;
+			Long imgId = null;
+			
 			List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
 			for (FileItem item : items) {
 	            if (item.isFormField()) {
 	                // Process regular form field (input type="text|radio|checkbox|etc", select, etc).
-//	                String fieldName = item.getFieldName();
-//	                String fieldValue = item.getString();
-	                // ... (do your job here)
+	                String fieldName = item.getFieldName();
+	                String fieldValue = item.getString();
+	                switch (fieldName) {
+	                case "name":
+	                	name = fieldValue;
+	                	break;
+	                case "age":
+	                	age = fieldValue;
+	                	break;
+	                case "gender":
+	                	sex = fieldValue;
+	                	break;
+	                case "disease":
+	                	disease = fieldValue;
+	                	break;
+	                case "details":
+	                	details = fieldValue;
+	                	break;
+	                case "pathy":
+	                	pathy = fieldValue;
+	                	break;
+	                case "contact":
+	                	contactNo = fieldValue;
+	                	break;
+		            case "email":
+	                	email = fieldValue;
+	                	break;
+	                }
 	            } else {
 	                // Process form file field (input type="file").
 	                String fieldName = item.getFieldName();
 	                String fileName = FilenameUtils.getName(item.getName());
+	                System.out.println("Found file field:" + fieldName);
+	                System.out.println("Found file:" + fileName);
 	                InputStream fileContent = item.getInputStream();
 	                byte[] bytes = IOUtils.toByteArray(fileContent);
 	                ImageFile img = new ImageFile();
 	                img.setData(bytes);
-	                ImageFile.saveImage(img);
+	                Key<ImageFile> imgFile = ImageFile.saveImage(img);
+	                imgId = imgFile.getId();
 	            }
 	        }
-			
+			Testimonial test = new Testimonial();
+			test.setName(name);
+			test.setAge(age);
+			test.setSex(sex);
+			test.setDiseaseName(disease);
+			test.setPathy(pathy);
+			test.setDetails(details);
+			test.setContact(contactNo);
+			test.setUserEmail(user.getEmail());
+			test.setPatientEmail(email);
+			test.setLastUpdatedAt(System.currentTimeMillis());
+			test.setYear(System.currentTimeMillis());
+			test.setImageId(imgId);
+			Database.addTestimonial(test);
 		}catch(FileUploadException e){
 			throw new ServletException("Cannot parse multipart request.", e);
 		}

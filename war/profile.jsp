@@ -46,8 +46,7 @@
 			<div class="col s9">
 				<div class="row">
 					<div class="col s12">
-						<ul class="tabs" id="profileTabs"
-							style="margin-bottom: 8px; margin-top: 50px; margin-right: 40px;">
+						<ul class="tabs" id="profileTabs" style="margin-bottom: 8px; margin-top: 50px; margin-right: 40px;">
 							<li class="tab col s6"><a class="active" href="#testimonialForm">You</a></li>
 							<li class="tab col s6"><a href="#Recommended">Recommended</a></li>
 						</ul>
@@ -104,6 +103,18 @@
 							<div class="input-field col s12">
 								<textarea id="textarea1" class="materialize-textarea" name="details"></textarea>
 								<label for="textarea1">Details</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s12">
+								<div class="file-field input-field">
+									<div class="btn">
+										<span>Upload File</span> <input type="file" name="file" id="file">
+									</div>
+									<div class="file-path-wrapper">
+										<input class="file-path validate" type="text">
+									</div>
+								</div>
 							</div>
 						</div>
 						<div class="row">
@@ -169,7 +180,7 @@
   		"coverTrigger" : "false",
   		"hover" : "true"
   	})
-  	var elem5 = document.querySelector('.select1');
+  	var elem5 = document.querySelector('.select');
   	var instance5 = M.FormSelect.init(elem5, {});
 
   	var elem6 = document.querySelector('.select2');

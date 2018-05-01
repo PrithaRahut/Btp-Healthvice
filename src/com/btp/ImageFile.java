@@ -16,8 +16,9 @@ public class ImageFile {
 	public void setData(byte[] data) {
 		this.data = data;
 	}
-	public static void saveImage(ImageFile img){
-		OfyService.ofy().save().entity(img).now();
+	public static Key<ImageFile> saveImage(ImageFile img){
+		System.out.println("in saveImage method");
+		return OfyService.ofy().save().entity(img).now();
 	}
 
 }

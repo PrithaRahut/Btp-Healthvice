@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.btp.User" %>
 <%@ page import="com.btp.Testimonial" %>
 <%@ page import="com.btp.Database" %>
 <%
@@ -30,64 +31,52 @@
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-  <head>
-  <link rel="stylesheet" href="./resources/css/font-awesome.min.css">
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="./resources/css/style.css">
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <style>
-    .card {
-      margin: 8px;
-      border: 1px solid #eee;
-      box-shadow: 1px 2px 1px grey;
-    }
-    .vote-btn {
-      background-color: #0171d4;
-      color: white;
-    }
-    .vote-btn.active {
-      background-color: green;
-    }
-  </style>
-  </head>
+<head>
+	<title>Testimonial</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="./resources/css/style_home.css">
+</head>
+<body>
+	<div class="container-fluid">
+		<!-- Header starts -->
+		<%@ include file="header.jsp"%>
+		<!-- Header ends -->
 
-  <body>
-    <%@ include file="header.jsp" %>
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-12">
-          <p>&nbsp;</p>
-        </div>
-        <div class="col-sm-12">
-          <div class="row card">
-            <div class="col-sm-12">
-              <div class="row">
-                <div class="col-sm-8">
-                  <h4><%=t.getDiseaseName() %> (<%= t.getPathy() %>)</h4>
-                </div>
-               <%--  <div class="col-sm-4">
-                  <h5 class="text-right"><%= DATE:TIME %></h5>
-                </div> --%>
-              </div>
-              <div class="row">
-                <div class="col-sm-12">
-                  <p>
-                    <%=t.getName() %><br/>
-                    <%=t.getAge() %><br/>
-                    <%=t.getSex() %><br/>
-                  </p>
-                </div>
-                <div class="col-sm-12">
-                  <p>
-                    <%=t.getDetails() %>
-                  </p>
-                </div>
-                <div class="col-sm-12">
-                  <hr/>
-                </div>
-                <div class="col-sm-12">
-                  <button class='btn vote-btn <%= isLikedByUser ? "active" : "" %>' id="like-btn">
+		<div id="content" style="margin: 100px;">
+			<div class="row">
+				<div class="col s3">
+					<p style="color: grey; font-size: 15px;">Name</p>
+					<h4><%=t.getName() %></h4>
+				</div>
+				<div class="col s3">
+					<p style="color: grey; font-size: 15px;">Age</p>
+					<h4><%=t.getAge() %></h4>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s3">
+					<p style="color: grey; font-size: 15px;">Disease</p>
+					<h4><%=t.getDiseaseName() %></h4>
+				</div>
+				<div class="col s3">
+					<p style="color: grey; font-size: 15px;">Treatment</p>
+					<h4><%=t.getPathy() %></h4>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s12">
+					<p><%=t.getDetails() %></p>
+				</div>
+			</div>
+			<div class="row">
+				<!-- <div class="col s3">
+				
+				</div>
+				<div class="col s3">
+				
+				</div> -->
+				<button class='btn vote-btn <%= isLikedByUser ? "active" : "" %>' id="like-btn">
                     <%= isLikedByUser ? "Liked" : "Like" %>&nbsp;
                     <span class="badge" id="numOfLikes"><%= numOfLikes %></span>
                   </button>
@@ -95,17 +84,12 @@
                     <%= isDislikedByUser ? "Disliked" : "Dislike" %>&nbsp;
                     <span class="badge" id="numOfDislikes"><%= numOfDislikes %></span>
                   </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+			</div>
+		</div>
 
+		<%@ include file="footer.jsp"%>
+	</div>
+</body>
   <script type="text/javascript">
     var testimonialId = <%= testimonialId %>;
     var isLikedByUser = <%= isLikedByUser %>;
@@ -143,4 +127,36 @@
       }});
     });
   </script>
+  
+  <script type="text/javascript">
+
+	var elem_m = document.querySelector('.modal');
+  	var instance_m = M.Modal.init(elem_m, {
+  		"dismissible" : "true",
+  		"opacity" : "0.5"
+  	});
+  	var elem2 = document.querySelector('.tabs');
+  	var instance2 = M.Tabs.init(elem2, {
+  		"duration" : "300"
+  	})
+  	var elem3 = document.querySelector('.datepicker');
+  	var instance3 = M.Datepicker.init(elem3,{
+  		"format" : "dd/mm/yyyy"
+  	})
+  	var elem4 = document.querySelector('.dropdown-trigger');
+  	var instance4 = M.Dropdown.init(elem4,{
+  		"alignment" : "bottom",
+  		"autoTrigger" : "true",
+  		"coverTrigger" : "false",
+  		"hover" : "true"
+  	})
+  	var elem5 = document.querySelector('.select');
+  	var instance5 = M.FormSelect.init(elem5, {});
+  	
+	var shouldOpenModal = <%=Boolean.parseBoolean((String)request.getAttribute("openModal"))%>
+	if(shouldOpenModal) {
+	  	instance_m.open();
+	}
+</script>
+
 </html>

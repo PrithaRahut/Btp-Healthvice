@@ -22,7 +22,9 @@
 	//log(d.getName());
 	List<Testimonial> list = null;
 	if(d != null){
+		//System.out.println("d is not null!");
 		list = Database.getTestimonialByDisease(d.getName());
+		//if(list != null) {System.out.println("list is not empty");}
 		for(Testimonial t:list){
 			System.out.println("From testimonial list:" + t.getDiseaseName());
 		}
@@ -36,319 +38,174 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>disease.html</title>
-<meta charset="utf-8">
-
-<!--<link rel="stylesheet" href="CSS/style.css">-->
-<link rel="stylesheet" href="./resources/css/bootstrap.min.css">
-<link rel="stylesheet" href="./resources/css/font-awesome.min.css">
-<link href="//fonts.googleapis.com/css?family=Alice|Monoton|Roboto+Condensed|Stint+Ultra+Expanded|Vast+Shadow" rel="stylesheet"> 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
-<script src="https://www.amcharts.com/lib/3/pie.js"></script>
-<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
-<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
-<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
-<style>
-    nav{
-        padding: 1%;
-    }
-    .navbar-default{
-        background-color: #fff;
-        border-color: #fff;
-        padding: 1%;
-    }
-    .navbar-default .navbar-brand{
-        color: #247ba0 !important;
-    }
-    .navbar-header{
-        margin-left: 5% !important;
-        font-family: 'PT Serif', serif;
-    }
-    .navbar-brand{
-        font-size: 35px;
-        font-weight: bold;
-        font-color: #247ba0 !important;
-    }
-    .navbar-right{
-        margin-right: 5%;
-    }
-    .navbar-default .navbar-nav > li > a {
-        color: #247ba0;
-    }
-    .nav > li > a{
-        padding: 10px 10px;
-        font-size: 15px;
-        font-weight: bold;
-    }
-    .btn-default{
-        background-color: #247ba0;
-        border-color: #247ba0;
-        font-weight: bold;
-        color: #fff;
-    }
-    .search{
-        /*border: none;*/
-        border: 0;
-    }
-    /*.nav-bar {
-        margin-top: 29px;
-    }*/
-
-    .content_column{
-        /*background-color: #c7c7c7;*/
-        margin-left: 3%;
-        width: 13%;
-    }
-    .open-book{
-        transform: rotate(-5deg); 
-        margin-bottom: 2%;
-    }
-    .content_column2{
-        border-left: 1px solid #cfcfcf;
-        height: 1650px;
-    }
-    .card_testimonial{
-        width: 103% !important;
-        box-shadow: 2px 2px 2px 2px grey;
-        /*padding-top: 6%;*/
-        margin-top: 10%;
-        margin-left: 2%;
-        background-color: #Fff;
-    }
-    .text_testimonial{
-        padding: 3%;
-    }
-    .col-xs-1{
-        width: 2%;
-    }
-    .col-xs-9{
-        width: 75%;
-    }
-    .row{
-        margin-left: 0px !important;
-        margin-right: 0px !important;
-    }
-    .col-xs-9 h1{
-        font-weight: bold;
-        font-family: 'Open Sans';
-        color: #508AA8;
-        font-size: 45px;
-    }
-    .col-xs-4{
-        width: 47%;
-    }
-    #chartdiv {
-  		width: 100%;
-  		height: 500px;
-	}
-</style>
-
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>DISEASES</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="./resources/css/style_home.css">
 </head>
 <body>
-<%@ include file="header.jsp" %>
-<%if(d == null) {%>
-	<p>No disease found.</p>
-	
-<% return; } %>
-<div class="content">
-    <div class="row" style="margin-top: 9%; margin-bottom: 5%;">
-        <div class="col-xs-2 content_column">
-            <img src="./resources/img/notebook.png" alt="book" class="open-book">
-            <p>Advices that matters!</p>
-            <hr>
-            <a href="#definition"><p><%=d.getName() %></p></a>
-            <a href="#symptoms"><p>Symptoms</p></a>
-            <a href="#cause"><p>Cause</p></a>
-            <a href="testimonial"><p>Latest Testimonials</p></a>
-        </div>
-        <div class="col-xs-1 content_column2">
-        </div>
-        <div class="col-xs-9">
-            <div class="row" id="definition" style="margin-bottom: 5%;">
-                <h1><%=d.getName() %></h1>
-                <hr>
-             	<p><%=d.getDesc() %></p>
+	<div class="container-fluid">
+		<!-- Header starts -->
+		<%@ include file="header.jsp" %>
+		<!-- Header ends -->
+		<div class="disease-content" style="margin:100px;">
+			<div class="row">
+				<div class="col s3">
+					<h5><%=d.getName() %></h5>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s12">
+					<p><%=d.getDesc() %></p>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col s3">
+					<h5>Symptoms</h5>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s12">
+					<p><%=d.getSymptoms() %></p>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col s3">
+					<h5>Causes</h5>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s12">
+					<p><%=d.getCause() %></p>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col s3">
+					<h5>Comparison by no. of testimonials for each pathy</h5>
+				</div>
+			</div>
+			<div class="row" id="charts" style="height: 25px;">
+                <div class = "col s6">
+                    <div id="chartdiv"></div>
+                </div>
             </div>
-            <div class="row" id="symptoms"  style="margin-bottom: 5%;">
-                <h1>Symptoms</h1>
-                <hr>
-               	<p><%=d.getSymptoms() %></p>   
+            <br>
+            <div class="row">
+            	<div class="col s3"><h5>Testimonials</h5></div>
             </div>
-            <div class="row" id="cause"  style="margin-bottom: 5%;">
-                <h1>Causes</h1>
-                <hr>
-                <p><%=d.getCause() %></p>
-            </div>
-          <div class="row" id="charts" style="height: 25px;">
-            	<div class = "col-xs-6">
-            		<!-- <h4 >Comparison by no. of testimonials for each pathy</h4> -->
-            		<div id="chartdiv"></div>
-            	</div>
-            	<div class = "col-xs-6">
-            		<!-- <h4>Comparison by no. of testimonials for each pathy</h4> -->
-            		<div id="chartdiv"></div>
-            	</div>
-            </div> 
-            <div class="row" id="testimonials"  style="margin-bottom: 5%;">
-                <h1>Latest Testimonials</h1>
-                <hr>
-               <!--  <div class="row">
-                    <div class="col-xs-4">
-                        <div class="card_testimonial">
-                            <div class="text_testimonial">
-                                <h4>Disease Name</h4>
-                                <p><b>Name: MONIKA SINGH(Changed)</b></p>
-                                <p><b>Age: 25</b></p>
-                                <p><b>Sex: Female</b></p>
-                                <p>He had been suffering from asthma for about six months. He complained of breathlessness, palpitation and nasal blockage. Additionally, he was suffering from hyperacidity and indigestion. He had no family history of asthma nor was he suffering from blood pressure or blood sugar..<a href="more"><u>More</u></a></p>
-                            </div>
-                        </div>
-                    </div>
-                    <!--<div class="col-xs-4" style="margin-left: 5%;">
-                        <div class="card_testimonial">
-                            <div class="text_testimonial">
-                                <h4>Disease Name</h4>
-                                <p><b>Name: MONIKA SINGH(Changed)</b></p>
-                                <p><b>Age: 25</b></p>
-                                <p><b>Sex: Female</b></p>
-                                <p>He had been suffering from asthma for about six months. He complained of breathlessness, palpitation and nasal blockage. Additionally, he was suffering from hyperacidity and indigestion. He had no family history of asthma nor was he suffering from blood pressure or blood sugar..<a href="more"><u>More</u></a></p>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-                <div class="col-xs-8">
-			<%-- 	<%if(list!=null){ %>
-				<%for(Testimonial t:list) {%>
-					<div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
-						<div class="card_testimonial">
-							<div class="text_testimonial">
-								<h4><%=t.getDiseaseName() %></h4>
-								<p><b><%=t.getPathy() %></b></p>
-								<p style="line-height:1.2em; height:3.6em; overflow:hidden;"><%=t.getDetails() %> </p>
-								<p><a href="more"><u>More</u></a></p>
-							</div>
+            <div class="row">
+				<div class="col s12">
+					<ul class="tabs" id="diseaseTabs">
+						<li class="tab col s3"><a class="active" href="#Homeopathy">Homeopathy</a></li>
+						<li class="tab col s3"><a href="#Allopathy">Allopathy</a></li>
+						<li class="tab col s3"><a href="#Ayurveda">Ayurveda</a></li>
+						<li class="tab col s3"><a href="#Naturopathy">Naturopathy</a></li>
+					</ul>
+				</div>
+			</div>
+			<div id="Homeopathy">
+				<%
+					if (list != null) {
+				%>
+				<%
+					for (Testimonial t : list) {
+				%>
+				<%
+					if (t.getPathy().equalsIgnoreCase("Homeopathy")) {
+				%>
+				<div class="row">
+					<div class="col s12">
+						<div class="card-panel">
+							<span class="card-title"><%=t.getDiseaseName() %>,<%=t.getPathy() %></span>
+							<hr>
+							<p style="line-height:1.2em; height:3.6em; overflow:hidden;"><%=t.getDetails() %> </p>
+                            <p><a href="testimonialDesc.jsp?testimonialId=<%=t.getId()%>"><u>More</u></a></p>
 						</div>
 					</div>
-					<%} %>
-					<%} %> --%>
-					<ul class="nav nav-tabs">
-					  <li class="active"><a data-toggle="tab" href="#Homeopathy">Homeopathy</a></li>
-					  <li><a data-toggle="tab" href="#Allopathy">Allopathy</a></li>
-					  <li><a data-toggle="tab" href="#Ayurveda">Ayurveda</a></li>
-					  <li><a data-toggle="tab" href="#Naturopathy">Naturopathy</a></li>
-					</ul>
-					
-					<div class="tab-content">
-					  <div id="Homeopathy" class="tab-pane fade in active">
-					    <%if(list!=null) {%>
-					    	<%for(Testimonial t:list) {%>
-					    		<%if(t.getPathy().equalsIgnoreCase("Homeopathy")){ %>
-					    			<div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
-										<div class="card_testimonial">
-											<div class="text_testimonial">
-												<h4><%=t.getDiseaseName() %></h4>
-												<p><b><%=t.getPathy() %></b></p>
-												<p style="line-height:1.2em; height:3.6em; overflow:hidden;"><%=t.getDetails() %> </p>
-												<p><a href="more"><u>More</u></a></p>
-											</div>
-										</div>
-									</div>
-									    			
-					    		<%} %>
-					    	<%} %>
-					    <%} %>
-					  </div>
-					  <div id="Allopathy" class="tab-pane fade">
-					     <%if(list!=null) {%>
-					    	<%for(Testimonial t:list) {%>
-					    		<%if(t.getPathy().equalsIgnoreCase("Allopathy")){ %>
-					    			<div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
-										<div class="card_testimonial">
-											<div class="text_testimonial">
-												<h4><%=t.getDiseaseName() %></h4>
-												<p><b><%=t.getPathy() %></b></p>
-												<p style="line-height:1.2em; height:3.6em; overflow:hidden;"><%=t.getDetails() %> </p>
-												<p><a href="more"><u>More</u></a></p>
-											</div>
-										</div>
-									</div>
-									    			
-					    		<%} %>
-					    	<%} %>
-					    <%} %>
-					  </div>
-					  <div id="Ayurveda" class="tab-pane fade">
-					     <%if(list!=null) {%>
-					    	<%for(Testimonial t:list) {%>
-					    		<%if(t.getPathy().equalsIgnoreCase("Ayurvedic")){ %>
-					    			<div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
-										<div class="card_testimonial">
-											<div class="text_testimonial">
-												<h4><%=t.getDiseaseName() %></h4>
-												<p><b><%=t.getPathy() %></b></p>
-												<p style="line-height:1.2em; height:3.6em; overflow:hidden;"><%=t.getDetails() %> </p>
-												<p><a href="more"><u>More</u></a></p>
-											</div>
-										</div>
-									</div>
-									    			
-					    		<%} %>
-					    	<%} %>
-					    <%} %>
-					  </div>
-					  <div id="Naturopathy" class="tab-pane fade">
-					    <%if(list!=null) {%>
-					    	<%for(Testimonial t:list) {%>
-					    		<%if(t.getPathy().equalsIgnoreCase("Naturopathy")){ %>
-					    			<div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
-										<div class="card_testimonial">
-											<div class="text_testimonial">
-												<h4><%=t.getDiseaseName() %></h4>
-												<p><b><%=t.getPathy() %></b></p>
-												<p style="line-height:1.2em; height:3.6em; overflow:hidden;"><%=t.getDetails() %> </p>
-												<p><a href="more"><u>More</u></a></p>
-											</div>
-										</div>
-									</div>
-									    			
-					    		<%} %>
-					    	<%} %>
-					    <%} %>
-					  </div>
-					</div>
 				</div>
-                
-            </div>
-        </div>
-    </div>
-</div>
 
+				<%
+					}
+				%>
+				<%
+					}
+				%>
+				<%
+					}
+				%>
+			</div>
+			<div id="Allopathy">
+			</div>
+			<div id="Ayurveda">
+			</div>
+			<div id="Naturopathy">
+			</div>
+		</div>		
+		<%@ include file="footer.jsp" %>
+	</div>
 </body>
 <script type="text/javascript">
+
+	var elem_m = document.querySelector('.modal');
+  	var instance_m = M.Modal.init(elem_m, {
+  		"dismissible" : "true",
+  		"opacity" : "0.5"
+  	});
+  	var elem2 = document.querySelector('.tabs');
+  	var instance2 = M.Tabs.init(elem2, {
+  		"duration" : "300"
+  	})
+  	var elem3 = document.querySelector('.datepicker');
+  	var instance3 = M.Datepicker.init(elem3,{
+  		"format" : "dd/mm/yyyy"
+  	})
+  	var elem4 = document.querySelector('.dropdown-trigger');
+  	var instance4 = M.Dropdown.init(elem4,{
+  		"alignment" : "bottom",
+  		"autoTrigger" : "true",
+  		"coverTrigger" : "false",
+  		"hover" : "true"
+  	})
+  	var elem5 = document.querySelector('.select');
+  	var instance5 = M.FormSelect.init(elem5, {});
+  	
+	var elem7 = document.getElementById('diseaseTabs')
+  	var instance7 = M.Tabs.init(elem7, {
+  		"duration" : "300"
+  	})
+  	
+	var shouldOpenModal = <%=Boolean.parseBoolean((String)request.getAttribute("openModal"))%>
+	if(shouldOpenModal) {
+	  	instance_m.open();
+	}
+</script>
+<script type="text/javascript">
 var chart = AmCharts.makeChart( "chartdiv", {
-	  "type": "pie",
-	  "theme": "light",
-	  "dataProvider": [ {
-	    "pathy": "Homeopathy",
-	    "count": <%=map.get("Homeopathy")%>
-	  }, {
-	    "pathy": "Allopathy",
-	    "count": <%=map.get("Allopathy")%>
-	  }, {
-	    "pathy": "Ayurveda",
-	    "count": <%=map.get("Ayurvedic")%>
-	  } ],
-	  "valueField": "count",
-	  "titleField": "pathy",
-	   "balloon":{
-	   "fixedPosition":true
-	  },
-	  "export": {
-	    "enabled": true
-	  }
-	} );
+      "type": "pie",
+      "theme": "light",
+      "dataProvider": [ {
+        "pathy": "Homeopathy",
+        "count": <%=map.get("Homeopathy")%>
+      }, {
+        "pathy": "Allopathy",
+        "count": <%=map.get("Allopathy")%>
+      }, {
+        "pathy": "Ayurveda",
+        "count": <%=map.get("Ayurvedic")%>
+      } ],
+      "valueField": "count",
+      "titleField": "pathy",
+       "balloon":{
+       "fixedPosition":true
+      },
+      "export": {
+        "enabled": true
+      }
+    } );
 setInterval(function(){
     var element = document.getElementById('chartdiv');
     if(element) {
@@ -358,29 +215,30 @@ setInterval(function(){
       }
     }
   }, 1000, 5);
-	
+    
 <%-- var chart1 = AmCharts.makeChart( "chartdiv1", {
-	  "type": "pie",
-	  "theme": "light",
-	  "dataProvider": [ {
-	    "pathy": "Homeopathy",
-	    "count": <%=map1.get("Homeopathy")%>
-	  }, {
-	    "pathy": "Allopathy",
-	    "count": <%=map1.get("Allopathy")%>
-	  }, {
-	    "pathy": "Ayurveda",
-	    "count": <%=map1.get("Ayurvedic")%>
-	  } ],
-	  "valueField": "count",
-	  "titleField": "pathy",
-	   "balloon":{
-	   "fixedPosition":true
-	  },
-	  "export": {
-	    "enabled": true
-	  }
-	} ); --%>
+      "type": "pie",
+      "theme": "light",
+      "dataProvider": [ {
+        "pathy": "Homeopathy",
+        "count": <%=map1.get("Homeopathy")%>
+      }, {
+        "pathy": "Allopathy",
+        "count": <%=map1.get("Allopathy")%>
+      }, {
+        "pathy": "Ayurveda",
+        "count": <%=map1.get("Ayurvedic")%>
+      } ],
+      "valueField": "count",
+      "titleField": "pathy",
+       "balloon":{
+       "fixedPosition":true
+      },
+      "export": {
+        "enabled": true
+      }
+    } ); --%>
 
 </script>
+
 </html>

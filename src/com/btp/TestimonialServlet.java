@@ -20,14 +20,14 @@ public class TestimonialServlet extends HttpServlet{
 		boolean openModal;
 		if(user == null){
 			openModal = true;
-			request.setAttribute("isLoggedIn", openModal);
+			request.setAttribute("openModal", String.valueOf(openModal));
 			RequestDispatcher dispatch=request.getRequestDispatcher("index.jsp");
 			dispatch.forward(request,response);
 			//response.sendRedirect("login.jsp");
 		}else{
 			//response.sendRedirect("testimonial.jsp");
 			request.setAttribute("user", user);
-			RequestDispatcher dispatch=request.getRequestDispatcher("testimonial.jsp");
+			RequestDispatcher dispatch=request.getRequestDispatcher("profile.jsp");
 			dispatch.forward(request,response);
 		}
 	}

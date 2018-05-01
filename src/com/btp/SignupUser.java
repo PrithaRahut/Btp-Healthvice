@@ -28,6 +28,8 @@ public class SignupUser extends HttpServlet{
 		
 		System.out.println("First Name found:"+fname);
 		String msg = null;
+		Boolean pwdUnmatch = false;
+		Boolean openModal = false;
 		if(pwd.equals(cpwd)){
 			User u = new User();
 			u.setFirstName(fname);
@@ -50,9 +52,12 @@ public class SignupUser extends HttpServlet{
 		}else{
 			msg = "Password do not match";
 			System.out.println("Password do not match");
+			pwdUnmatch = true;
+			openModal = true;
 		}
 		
-		request.setAttribute("msg", msg);
+		request.setAttribute("pwdUnmatch", String.valueOf(pwdUnmatch));
+		request.setAttribute("openModal", String.valueOf(openModal));
 		
 		RequestDispatcher dispatch=request.getRequestDispatcher("index.jsp");
 		dispatch.forward(request,response);

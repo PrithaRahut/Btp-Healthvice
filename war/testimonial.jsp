@@ -262,8 +262,10 @@
 							</div> -->
 							<div class="col-xs-8">
 							<%if(list!=null && !list.isEmpty()){ %>
-								<%for(Testimonial t:list) {%>
-									<div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
+								<%for(int i = 0; i < list.size(); i++) {
+									Testimonial t = list.get(i);
+								%>
+									<div class="row testimonial" style="margin-left: 0px !important; margin-right: 0px !important; <%= i > 2 ? "display: hidden" : "" %>">
 										<div class="card_testimonial">
 											<div class="text_testimonial">
 												<h4><%=t.getDiseaseName() %></h4>
@@ -280,6 +282,11 @@
 							<%} %>
 								
 							</div>
+							
+							<div>
+							 <button id='readMoreBtn' onclick='displayMoreTests()'>Read More</button>
+							</div>
+							
 						</div>
 					  </div>
 					</div>
@@ -324,6 +331,22 @@
 		</div>
 	</footer>-->
 
+	<script>
+	  function displayMoreTests() {
+		  //readMoreBtn
+		  int newTestsDisplayed = 0;
+		  $('.testimonial').each(fuction () {
+			  if (newTestsDisplayed < 3 && this.is(':hidden')) {
+				  this.show();
+				  newTestsDisplayed++;
+			  }
+		  });
+		  
+		  if (newTestsDisplayed == 0) {
+			  $('#readMoreBtn').hide();
+		  }
+	  }
+	</script>
 </body>
 </html>
 

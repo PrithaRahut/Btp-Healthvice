@@ -10,6 +10,15 @@
 	<link rel="stylesheet" type="text/css" href="./resources/css/style_home.css">
 </head>
 <body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.12&appId=1221013798030224&autoLogAppEvents=1';
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+
 	<div class="container-fluid">
 		<!-- Header starts -->
 		<%@ include file="header.jsp" %>
@@ -106,17 +115,7 @@
 
 </body>
 <script type="text/javascript">
-	var shouldOpenModal = <%
-	Boolean.parseBoolean((String)request.getAttribute("openModal"));
-	%>
-	if(shouldOpenModal) {
-		var elem1 = document.querySelector('.modal');
-	  	var instance1 = M.Modal.init(elem1, {
-	  		"dismissible" : "true",
-	  		"opacity" : "0.5"
-	  	});
-		
-	}
+
 	var elem_m = document.querySelector('.modal');
   	var instance_m = M.Modal.init(elem_m, {
   		"dismissible" : "true",
@@ -137,7 +136,35 @@
   		"coverTrigger" : "false",
   		"hover" : "true"
   	})
-  	var elem5 = document.querySelector('.select1');
+  	var elem5 = document.querySelector('.select');
   	var instance5 = M.FormSelect.init(elem5, {});
+  	
+	var shouldOpenModal = <%=Boolean.parseBoolean((String)request.getAttribute("openModal"))%>
+	if(shouldOpenModal) {
+	  	instance_m.open();
+	}
+</script>
+
+<!-- FB Login -->
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1221013798030224',
+      cookie     : true,
+      xfbml      : true,
+      version    : 'v2.12'
+    });
+      
+    FB.AppEvents.logPageView();   
+      
+  };
+
+  if (false) {
+
+	  FB.getLoginStatus(function(response) {
+	      statusChangeCallback(response);
+	  });
+  }
 </script>
 </html>

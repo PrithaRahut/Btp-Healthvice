@@ -6,7 +6,11 @@ import java.util.List;
 
 public class ComparisonOfPathy {
 	public static HashMap<String, Integer> comparePathyForDisease(String diseaseName){
+		//System.out.println("In comparison of pathy:" + diseaseName);
 		List<Testimonial> list = Database.getTestimonialByDisease(diseaseName);
+		for(Testimonial t:list){
+			System.out.print("in comparison of pathy----"+t.getName());
+		}
 		HashMap<String,Integer> mapCount = new HashMap<String,Integer>(); //for pathy vs count Of Testimonials with that pathy
 		HashMap<String,Integer> mapUpvotes = new HashMap<String,Integer>(); //for pathy vs count of upvotes with that pathy
 		for(Testimonial t:list){
@@ -22,6 +26,7 @@ public class ComparisonOfPathy {
 				mapUpvotes.put(t.getPathy(), t.getNumOfUpvotes());
 			}
 		}
+		System.out.println("In comparison of pathy: No. of testimonials with homeopathy: "+mapCount.get("Homeopathy"));
 		List<HashMap> listmap = new ArrayList<HashMap>();
 		listmap.add(mapUpvotes);
 		listmap.add(mapCount);
