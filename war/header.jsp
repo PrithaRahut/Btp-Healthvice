@@ -7,9 +7,10 @@
 %>
 		<nav>
 			<div class="nav-wrapper" style="box-shadow: 0px 0px 0px;">
-      		<a href="#" class="brand-logo">HEALTHVICE</a>
+      		<a href="index.jsp" class="brand-logo">HEALTHVICE</a>
       		<ul id="nav-mobile" class="right" style="margin: 0 auto;">
         		<li><a href="#aboutus">About Us</a></li>
+        		<li><a href="TestimonialServlet">Share your experience!</a></li>
         		<li><a class='dropdown-trigger nooutline' href="#" data-target='diseaseDropDown'>Diseases</a></li>
         		<%if(u == null){ %>
         		<li><a class="modal-trigger" href="#LoginModal">Login</a></li>

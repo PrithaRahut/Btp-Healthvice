@@ -46,6 +46,12 @@
 		<div id="content" style="margin: 100px;">
 			<div class="row">
 				<div class="col s3">
+					<p style="color: grey; font-size: 15px;">Testimonial ID</p>
+					<h6><a href="#"><%=t.getYear() %></a>/<a href="#"><%=t.getDiseaseName() %></a>/<%=t.getId() %></h6>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s3">
 					<p style="color: grey; font-size: 15px;">Name</p>
 					<h4><%=t.getName() %></h4>
 				</div>

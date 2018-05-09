@@ -11,11 +11,11 @@
 	System.out.println("User logged in now:" + user.getFirstName());
 	List<Testimonial> list1 = Database.getTestimonialByUser(user.getEmail()); //PREVIOUS TESTIMONIALS ENTERED BY USER
 	for(Testimonial t : list1){
-		System.out.println(t.getDiseaseName());
+		System.out.println("Hello" + t.getDiseaseName());
 	}
 	//User uu = (User)request.getSession().getAttribute("user");
 	List<Testimonial> list = Recommendation.getLatestTestimonial(request);  //TESTIMONIALS RECOMMENDED TO USER
-	System.out.println("In following.jsp:" + list.size());
+	//System.out.println("In following.jsp:" + list.size());
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -126,22 +126,39 @@
 					</form>
 					<h4>Shared by You</h4>
 					<hr style="background-color: #1de9b6; border-color: #1de9b6;">
+					<%if(list1!=null){ %>
+					<%for(Testimonial t:list1) {%>
 					<div class="row">
 						<div class="col s12">
-							<div class="card-panel" style="background-color: #a7ffeb;">
-								<span class="card-title">Arthiritis and frequent cold,HOMEOPATHY</span>
+							<div class="card-panel">
+								<span class="card-title" ><b><a href="testimonialDesc.jsp?testimonialId=<%=t.getId()%>" style="color:#00bfa5;"><%=t.getDiseaseName() %>,<%=t.getPathy() %></a></b></span>
 								<hr>
-								<p>
-									She was suffering with pain in inter-phalangeal joints of hands
-									and metatarsal joints of feet since last two years. She would
-									have severe continuous pain daily...&nbsp;&nbsp;<a href="#">More</a>
+								<p style="line-height:1.2em; height:3.6em; overflow:hidden;">
+									<%=t.getDetails() %>
 								</p>
 							</div>
 						</div>
 					</div>
+					<%} %>
+					<%} %>
 				</div>
-				<div id="Recommended">
+				<div id="Recommended"> <!-- RECOMMENDED TAB FOR USER -->
+					<%if(list!=null){ %>
+					<%for(Testimonial t:list) {%>
 					<div class="row">
+						<div class="col s12">
+							<div class="card-panel">
+								<span class="card-title" ><b><a href="testimonialDesc.jsp?testimonialId=<%=t.getId()%>" style="color:#00bfa5;"><%=t.getDiseaseName() %>,<%=t.getPathy() %></a></b></span>
+								<hr>
+								<p style="line-height:1.2em; height:3.6em; overflow:hidden;">
+									<%=t.getDetails() %>
+								</p>
+							</div>
+						</div>
+					</div>
+					<%} %>
+					<%} %>
+					<!-- <div class="row">
 						<div class="col s12">
 							<div class="card-panel" style="background-color: #a7ffeb;">
 								<span class="card-title">Arthiritis and frequent cold,HOMEOPATHY</span>
@@ -152,7 +169,7 @@
 								</p>
 							</div>
 						</div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>

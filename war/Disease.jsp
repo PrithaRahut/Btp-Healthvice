@@ -9,7 +9,7 @@
 
 <%
 	String val = request.getParameter("val");
-	System.out.println("Disease 1:" +val);
+	log("Disease 1:" +val);
 	//log(val);
 	Disease d= null;
 	try{
@@ -19,14 +19,15 @@
 	}
 	
 	System.out.println("Disease 2:" +d.getName());
-	//log(d.getName());
+	log(d.getName());
 	List<Testimonial> list = null;
 	if(d != null){
 		//System.out.println("d is not null!");
 		list = Database.getTestimonialByDisease(d.getName());
 		//if(list != null) {System.out.println("list is not empty");}
 		for(Testimonial t:list){
-			System.out.println("From testimonial list:" + t.getDiseaseName());
+			log("inside for loop");
+			log("From testimonial list:" + t.getDiseaseName());
 		}
 	}
 	HashMap<String, Integer> map = ComparisonOfPathy.comparePathyForDisease(d.getName());

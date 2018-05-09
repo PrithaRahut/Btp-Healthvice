@@ -64,12 +64,18 @@ public class Database {
 		return list;
 	}
 	public static List<Testimonial> getTestimonialByDisease(String diseaseName){
-		//System.out.println("here "+ diseaseName);
+		System.out.println("here in database.java "+ diseaseName);
 		List<Testimonial> list= OfyService.ofy().load()
 				.type(Testimonial.class)
 				.filter("diseaseName",diseaseName)
-				
 				.list();
+		if(list.isEmpty()){
+			System.out.println("list is empty!");
+		}
+		for(Testimonial t:list){
+			System.out.println("inside for loop in Database.java");
+			System.out.println("From testimonial list:" + t.getDiseaseName());
+		}
 		return list;
 		
 	}
