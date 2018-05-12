@@ -26,7 +26,7 @@ public class Testimonial implements Serializable{
 	String name;
 	String contact;
 	String patientEmail;//Email id of patient
-	Long imgId;
+	String FileName;
 	@Index
 	List<String> userUpvote;
 	@Index
@@ -113,13 +113,7 @@ public class Testimonial implements Serializable{
 	public void setPatientEmail(String patientEmail) {
 		this.patientEmail = patientEmail;
 	}
-	public Long getImgId() {
-		return imgId;
-	}
-	public void setImageId(Long imgId) {
-		System.out.println("setting image id\n");
-		this.imgId = imgId;
-	}
+	
 	public List<String> getUserUpvote() {
 		return userUpvote;
 	}
@@ -155,6 +149,12 @@ public class Testimonial implements Serializable{
 	}
 	public void setLastUpdatedAt(Long lastUpdatedAt) {
 		this.lastUpdatedAt = lastUpdatedAt;
+	}
+	public String getFileName() {
+		return FileName;
+	}
+	public void setFileName(String fileName) {
+		FileName = fileName;
 	}
 
 }

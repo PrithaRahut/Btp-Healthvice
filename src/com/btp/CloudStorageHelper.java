@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.channels.Channels;
+import java.util.ArrayList;
 
 public class CloudStorageHelper extends HttpServlet{
 	 public static final boolean SERVE_USING_BLOBSTORE_API = false;
@@ -38,7 +39,7 @@ public class CloudStorageHelper extends HttpServlet{
 	   * This is where backoff parameters are configured. Here it is aggressively retrying with
 	   * backoff, up to 10 times but taking no more that 15 seconds total to do so.
 	   */
-	  private final GcsService gcsService = GcsServiceFactory.createGcsService(new RetryParams.Builder()
+	  private final static GcsService gcsService = GcsServiceFactory.createGcsService(new RetryParams.Builder()
 	      .initialRetryDelayMillis(10)
 	      .retryMaxAttempts(10)
 	      .totalRetryPeriodMillis(15000)
@@ -53,9 +54,9 @@ public class CloudStorageHelper extends HttpServlet{
 	   * a request to read the GCS file named Bar in the bucket Foo.
 	   */
 	//[START doGet]
-	  @Override
-	  public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-	    GcsFilename fileName = getFileName(req);
+
+	  public static Byte[] getFile(String FileName) throws IOException {
+	    GcsFilename fileName = getFileName(FileName);
 //	    if (SERVE_USING_BLOBSTORE_API) {
 //	      BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
 //	      BlobKey blobKey = blobstoreService.createGsBlobKey(
@@ -63,8 +64,10 @@ public class CloudStorageHelper extends HttpServlet{
 //	      blobstoreService.serve(blobKey, resp);
 //	    } else {
 	      GcsInputChannel readChannel = gcsService.openPrefetchingReadChannel(fileName, 0, BUFFER_SIZE);
-	      copy(Channels.newInputStream(readChannel), resp.getOutputStream());
+	   
+	     // copy(Channels.newInputStream(readChannel), resp.getOutputStream());
 	    //}
+	      return getBytesFromStream(Channels.newInputStream(readChannel));
 	  }
 	//[END doGet]
 
@@ -74,29 +77,47 @@ public class CloudStorageHelper extends HttpServlet{
 	   * a request to create a GCS file named Bar in bucket Foo.
 	   */
 	//[START doPost]
-	  @Override
-	  public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+	  
+	  public static String uploadFile(String FileName, InputStream inputstream) throws IOException {
 	    GcsFileOptions instance = GcsFileOptions.getDefaultInstance();
-	    GcsFilename fileName = getFileName(req);
+	    GcsFilename fileName = getFileName(FileName);
 	    GcsOutputChannel outputChannel;
 	    outputChannel = gcsService.createOrReplace(fileName, instance);
-	    copy(req.getInputStream(), Channels.newOutputStream(outputChannel));
+	    copy(inputstream, Channels.newOutputStream(outputChannel));
+	    return FileName;
 	  }
 	//[END doPost]
 
-	  private GcsFilename getFileName(HttpServletRequest req) {
-	    String[] splits = req.getRequestURI().split("/", 4);
-	    if (!splits[0].equals("") || !splits[1].equals("gcs")) {
-	      throw new IllegalArgumentException("The URL is not formed as expected. " +
-	          "Expecting /gcs/<bucket>/<object>");
-	    }
-	    return new GcsFilename(splits[2], splits[3]);
+	  private static GcsFilename getFileName(String FileName) {
+//	    String[] splits = req.getRequestURI().split("/", 4);
+//	    if (!splits[0].equals("") || !splits[1].equals("gcs")) {
+//	      throw new IllegalArgumentException("The URL is not formed as expected. " +
+//	          "Expecting /gcs/<bucket>/<object>");
+//	    }
+		  
+	    return new GcsFilename("lnmhealthvice.appspot.com", FileName);
 	  }
+	     private static Byte[] getBytesFromStream(InputStream stream) throws IOException {
+	    	 ArrayList<Byte> list = new ArrayList<Byte>();
+	    	     try {
+	    	       byte[] buffer = new byte[BUFFER_SIZE];
+	    	       int bytesRead = stream.read(buffer);
+	    	       while (bytesRead != -1) {
+	    	         for (int i=0; i < buffer.length; i++) {
+	    	         list.add(buffer[i]);
+	    	         }
+	    	         bytesRead = stream.read(buffer);
+	    	       }
+	    	     } finally {
+	    	     stream.close();
+	    	     }
+	    	     return list.toArray(new Byte[0]);
+	    	   }
 
 	  /**
 	   * Transfer the data from the inputStream to the outputStream. Then close both streams.
 	   */
-	  private void copy(InputStream input, OutputStream output) throws IOException {
+	  private static void copy(InputStream input, OutputStream output) throws IOException {  
 	    try {
 	      byte[] buffer = new byte[BUFFER_SIZE];
 	      int bytesRead = input.read(buffer);

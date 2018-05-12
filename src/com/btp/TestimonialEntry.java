@@ -48,7 +48,7 @@ public class TestimonialEntry extends HttpServlet{
 			String pathy = null;
 			String contactNo = null;
 			String email = null;
-			Long imgId = null;
+			String imageFileName = null;
 			
 		    try {
 		          ServletFileUpload upload = new ServletFileUpload();
@@ -87,19 +87,24 @@ public class TestimonialEntry extends HttpServlet{
 		                	break;
 		                }
 		             // logger.warning("Got a form field: " + item.getFieldName()+ "value="+ item.getName());
-		              System.out.println("Got a form field: " + item.getFieldName()+ "value="+ IOUtils.toString(stream, "UPS-8"));
+		             // System.out.println("TestimonialEntry.java: lets get form fields!!!!!!");
+		              System.out.println("Got a form field: " + item.getFieldName()+ "value="+ IOUtils.toString(stream, "UTF-8"));
+		             // System.out.println("Got a form field: " + item.getFieldName()+ "value="+ item.getName());
 		              String idForm= item.getFieldName();
 		            } else {
+		           
 		             // logger.warning("Got an uploaded file: " + item.getFieldName() ", name = " + item.getName()+ "  content="+item.getContentType() + " header="+item.getHeaders());
 		              System.out.println("Got an uploaded file: " + item.getFieldName() +
 		                          ", name = " + item.getName()+ "  content="+item.getContentType() + " header="+item.getHeaders());
 		              // here  save
-		              //success = insertFile(String title,String mimeType, String filename, InputStream stream);                  
+		              //success = insertFile(String title,String mimeType, String filename, InputStream stream); 
+		              String str = item.getName() + System.currentTimeMillis();
+		              imageFileName = CloudStorageHelper.uploadFile(str, item.openStream());
 
 		            }
 		          }
 		    } catch (Exception ex) {
-
+		    	throw new ServletException(ex);
 		    }
 			
 //			List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
@@ -164,6 +169,7 @@ public class TestimonialEntry extends HttpServlet{
 			test.setPatientEmail(email);
 			test.setLastUpdatedAt(System.currentTimeMillis());
 			test.setYear(System.currentTimeMillis());
+			test.setFileName(imageFileName);
 //			if(imgId != null){
 //				test.setImageId(imgId);
 //			}

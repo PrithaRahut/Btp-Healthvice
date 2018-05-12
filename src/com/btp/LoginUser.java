@@ -30,7 +30,7 @@ public class LoginUser extends HttpServlet{
 			request.setAttribute("msg", msg);
 			RequestDispatcher req = request.getRequestDispatcher("profile.jsp"); //Redirect to page where user was initially
 			req.forward(request, response);
-			System.out.println("Successfully logged in!");
+			//System.out.println("Successfully logged in!");
 			
 		}else{
 			//msg="Incorrect email or password";
@@ -40,7 +40,7 @@ public class LoginUser extends HttpServlet{
 			request.setAttribute("openModal", String.valueOf(openModal));
 			RequestDispatcher req=request.getRequestDispatcher("index.jsp");
 			req.forward(request, response);
-			System.out.println("Incorrect email or password");
+			//System.out.println("Incorrect email or password");
 
 			
 		}

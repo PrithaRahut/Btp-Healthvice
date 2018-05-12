@@ -43,7 +43,7 @@ public class Recommendation{
 			}
 		}
 		if(listRecent != null){
-			System.out.println("Size of listRecent:" + listRecent.size());
+			//System.out.println("Size of listRecent:" + listRecent.size());
 			for(Testimonial t : listRecent){
 				if(diseasesLiked.containsKey(t.getDiseaseName()) && pathyLiked.containsKey(t.getPathy())){
 					int score = diseasesLiked.get(t.getDiseaseName())*2 + pathyLiked.get(t.getPathy());
@@ -51,10 +51,10 @@ public class Recommendation{
 					
 				}
 			}
-			System.out.println("Before sorting\n");
-			for(Testimonial t:listRecent){
-				System.out.println("Name:"+t.getName() +"Scores:" + t.getScore());
-			}
+			//System.out.println("Before sorting\n");
+//			for(Testimonial t:listRecent){
+//				System.out.println("Name:"+t.getName() +"Scores:" + t.getScore());
+//			}
 			//sort the list on the basis of score assigned
 			Collections.sort(listRecent, new Comparator<Testimonial>() {
 	
@@ -65,10 +65,10 @@ public class Recommendation{
 		        		return new Long(t2.getLastUpdatedAt()).compareTo(t1.getLastUpdatedAt());
 		        }
 		    });
-			System.out.println("After sorting\n");
-			for(Testimonial t:listRecent){
-				System.out.println("Name:"+t.getName() +"Scores:" + t.getScore());
-			}
+			//System.out.println("After sorting\n");
+//			for(Testimonial t:listRecent){
+//				System.out.println("Name:"+t.getName() +"Scores:" + t.getScore());
+//			}
 		} else {
 			listRecent = new ArrayList();
 			System.out.println("listRecent was null");

@@ -1,8 +1,10 @@
+<%@page import="com.oreilly.servlet.Base64Encoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.btp.User" %>
 <%@ page import="com.btp.Testimonial" %>
 <%@ page import="com.btp.Database" %>
+<%@ page import="com.btp.CloudStorageHelper" %>
 <%
 	User uu = (User)request.getSession().getAttribute("user");
 	boolean isLikedByUser = false;
@@ -75,6 +77,23 @@
 					<p><%=t.getDetails() %></p>
 				</div>
 			</div>
+			<%
+				if (t.getFileName() != null && !t.getFileName().isEmpty()) {
+					Byte[] fileBytes = CloudStorageHelper.getFile(t.getFileName());
+					byte[] bytes = new byte[fileBytes.length];
+					int j = 0;
+					for (Byte b : CloudStorageHelper.getFile(t.getFileName()))
+						bytes[j++] = b.byteValue();
+					String base64 = Base64Encoder.encode(bytes);
+					String imgUrl = String.format("data:image/jpg;base64,%s", base64);
+				
+			%>
+			<div class="row">
+				<div class="col s12">
+					<img src="<%=imgUrl%>">
+				</div>
+			</div>
+			<%} %>
 			<div class="row">
 				<!-- <div class="col s3">
 				
