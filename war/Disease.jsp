@@ -24,11 +24,11 @@
 	if(d != null){
 		//System.out.println("d is not null!");
 		list = Database.getTestimonialByDisease(d.getName());
-		//if(list != null) {System.out.println("list is not empty");}
-		for(Testimonial t:list){
+		
+		/* for(Testimonial t:list){
 			log("inside for loop");
 			log("From testimonial list:" + t.getDiseaseName());
-		}
+		} */
 	}
 	HashMap<String, Integer> map = ComparisonOfPathy.comparePathyForDisease(d.getName());
 	/* List<HashMap> listmap = ComparisonOfPathy.comparePathyForDisease(d.getName());
@@ -43,6 +43,11 @@
 	<title>DISEASES</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+	<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+	<script src="https://www.amcharts.com/lib/3/pie.js"></script>
+	<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+	<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+	<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
 	<link rel="stylesheet" type="text/css" href="./resources/css/style_home.css">
 </head>
 <body>
@@ -84,14 +89,15 @@
 				</div>
 			</div>
 			<br>
+			<!-- TO CREATE PIE CHART -->
 			<div class="row">
-				<div class="col s3">
+				<div class="col s6">
 					<h5>Comparison by no. of testimonials for each pathy</h5>
 				</div>
 			</div>
-			<div class="row" id="charts" style="height: 25px;">
+			<div class="row" id="charts">
                 <div class = "col s6">
-                    <div id="chartdiv"></div>
+                    <div id="chartdiv" style="height:300px;"></div>
                 </div>
             </div>
             <br>
@@ -140,10 +146,97 @@
 				%>
 			</div>
 			<div id="Allopathy">
+				<%
+					if (list != null) {
+				%>
+				<%
+					for (Testimonial t : list) {
+				%>
+				<%
+					if (t.getPathy().equalsIgnoreCase("Allopathy")) {
+				%>
+				<div class="row">
+					<div class="col s12">
+						<div class="card-panel">
+							<span class="card-title"><%=t.getDiseaseName() %>,<%=t.getPathy() %></span>
+							<hr>
+							<p style="line-height:1.2em; height:3.6em; overflow:hidden;"><%=t.getDetails() %> </p>
+                            <p><a href="testimonialDesc.jsp?testimonialId=<%=t.getId()%>"><u>More</u></a></p>
+						</div>
+					</div>
+				</div>
+
+				<%
+					}
+				%>
+				<%
+					}
+				%>
+				<%
+					}
+				%>	
 			</div>
 			<div id="Ayurveda">
+				<%
+					if (list != null) {
+				%>
+				<%
+					for (Testimonial t : list) {
+				%>
+				<%
+					if (t.getPathy().equalsIgnoreCase("Ayurveda")) {
+				%>
+				<div class="row">
+					<div class="col s12">
+						<div class="card-panel">
+							<span class="card-title"><%=t.getDiseaseName() %>,<%=t.getPathy() %></span>
+							<hr>
+							<p style="line-height:1.2em; height:3.6em; overflow:hidden;"><%=t.getDetails() %> </p>
+                            <p><a href="testimonialDesc.jsp?testimonialId=<%=t.getId()%>"><u>More</u></a></p>
+						</div>
+					</div>
+				</div>
+
+				<%
+					}
+				%>
+				<%
+					}
+				%>
+				<%
+					}
+				%>
 			</div>
 			<div id="Naturopathy">
+				<%
+					if (list != null) {
+				%>
+				<%
+					for (Testimonial t : list) {
+				%>
+				<%
+					if (t.getPathy().equalsIgnoreCase("Naturopathy")) {
+				%>
+				<div class="row">
+					<div class="col s12">
+						<div class="card-panel">
+							<span class="card-title"><%=t.getDiseaseName() %>,<%=t.getPathy() %></span>
+							<hr>
+							<p style="line-height:1.2em; height:3.6em; overflow:hidden;"><%=t.getDetails() %> </p>
+                            <p><a href="testimonialDesc.jsp?testimonialId=<%=t.getId()%>"><u>More</u></a></p>
+						</div>
+					</div>
+				</div>
+
+				<%
+					}
+				%>
+				<%
+					}
+				%>
+				<%
+					}
+				%>
 			</div>
 		</div>		
 		<%@ include file="footer.jsp" %>
@@ -190,14 +283,17 @@ var chart = AmCharts.makeChart( "chartdiv", {
       "theme": "light",
       "dataProvider": [ {
         "pathy": "Homeopathy",
-        "count": <%=map.get("Homeopathy")%>
+        "count": <%=map.get("homeopathy")%>
       }, {
         "pathy": "Allopathy",
-        "count": <%=map.get("Allopathy")%>
+        "count": <%=map.get("allopathy")%>
       }, {
         "pathy": "Ayurveda",
-        "count": <%=map.get("Ayurvedic")%>
-      } ],
+        "count": <%=map.get("ayurveda")%>
+      }, {
+          "pathy": "Naturopathy",
+          "count": <%=map.get("naturopathy")%>
+        } ],
       "valueField": "count",
       "titleField": "pathy",
        "balloon":{

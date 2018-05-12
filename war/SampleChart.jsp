@@ -4,7 +4,7 @@
 <%@ page import="com.btp.ComparisonOfPathy" %>
 <%
 	HashMap<String,Integer> map = ComparisonOfPathy.comparePathyForDisease("Asthma");
-	System.out.println("Testing map:" + map.get("Homeopathy"));
+	System.out.println("Testing map:" + map.get("homeopathy"));
 
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -20,7 +20,7 @@
 <style type="text/css">
 #chartdiv {
   width: 100%;
-  height: 500px;
+  height: 300px;
 }
 </style>
 </head>
@@ -33,13 +33,13 @@ var chart = AmCharts.makeChart( "chartdiv", {
 	  "theme": "light",
 	  "dataProvider": [ {
 	    "pathy": "Homeopathy",
-	    "count": <%=map.get("Homeopathy")%>
+	    "count": <%=map.get("homeopathy")%>
 	  }, {
 	    "pathy": "Allopathy",
-	    "count": <%=map.get("Allopathy")%>
+	    "count": <%=map.get("allopathy")%>
 	  }, {
 	    "pathy": "Ayurveda",
-	    "count": <%=map.get("Ayurvedic")%>
+	    "count": <%=map.get("ayurveda")%>
 	  } ],
 	  "valueField": "count",
 	  "titleField": "pathy",
