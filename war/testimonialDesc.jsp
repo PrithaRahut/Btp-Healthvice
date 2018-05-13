@@ -12,9 +12,9 @@
 	int numOfLikes = 0;
 	int numOfDislikes = 0;
 	String testimonialId = request.getParameter("testimonialId");
-	System.out.println("In testimonial Description:" + testimonialId);
+	//System.out.println("In testimonial Description:" + testimonialId);
 	Testimonial t = Database.getTestimonialById(Long.parseLong(testimonialId));
-	System.out.println("In testimonialDesc.jsp:" + t.getDiseaseName());
+	//System.out.println("In testimonialDesc.jsp:" + t.getDiseaseName());
 	if(t.getUserUpvote() != null && !t.getUserUpvote().isEmpty()){
 		numOfLikes = t.getUserUpvote().size();
 		if(t.getUserUpvote().contains(uu.getEmail()) == true){
@@ -90,17 +90,12 @@
 			%>
 			<div class="row">
 				<div class="col s12">
-					<img src="<%=imgUrl%>">
+					<img src="<%=imgUrl%>" style="height:200px; width:200px;">
 				</div>
 			</div>
 			<%} %>
 			<div class="row">
-				<!-- <div class="col s3">
 				
-				</div>
-				<div class="col s3">
-				
-				</div> -->
 				<button class='btn vote-btn <%= isLikedByUser ? "active" : "" %>' id="like-btn">
                     <%= isLikedByUser ? "Liked" : "Like" %>&nbsp;
                     <span class="badge" id="numOfLikes"><%= numOfLikes %></span>

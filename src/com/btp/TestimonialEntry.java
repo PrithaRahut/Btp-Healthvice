@@ -59,7 +59,7 @@ public class TestimonialEntry extends HttpServlet{
 		            if (item.isFormField()) {
 		            	// Process regular form field (input type="text|radio|checkbox|etc", select, etc).
 		                String fieldName = item.getFieldName();
-		                String fieldValue = item.getName();
+		                String fieldValue = IOUtils.toString(stream, "UTF-8");
 		                switch (fieldName) {
 		                case "name":
 		                	name = fieldValue;
@@ -157,6 +157,7 @@ public class TestimonialEntry extends HttpServlet{
 	 	                  
 	       //     }
 	      //  }
+		    System.out.println("Name = "+name + "Age="+ age);
 			Testimonial test = new Testimonial();
 			test.setName(name);
 			test.setAge(age);
