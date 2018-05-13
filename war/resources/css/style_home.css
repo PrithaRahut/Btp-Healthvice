@@ -1,5 +1,7 @@
 @import url('https://rsms.me/inter/inter-ui.css');
-
+body {
+	font-family: 'Inter UI', sans-serif;
+}
 .brand-logo{
 	margin-left: 25px;
 }

@@ -40,10 +40,10 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="./resources/css/style_home.css">
 <style type="text/css">
-.button .active{
+.btn.active{
 	background-color : green;
 }
-.button .badge {
+.btn .badge {
 	color : white;
 	padding : 6px;
 }
@@ -128,30 +128,43 @@
     var numOfDislikes = <%= numOfDislikes %>;
     $("#like-btn").click(function(){
       $.ajax({url: "http://localhost:8888/UpvoteDownvote?likedByUser=true&tid=" + testimonialId, type:"POST", success: function(result){
-        if (isLikedByUser) {
+       	if(isDislikedByUser){
+       		numOfDislikes--;
+       		$('#numOfDislikes').text(numOfDislikes);
+       	}
+    	  if (isLikedByUser) {
           // if the testimonial was earlier liked by user then remove it
           isLikedByUser = false;
           numOfLikes--;
           $("#like-btn").removeClass("active");
         } else {
           isLikedByUser = true;
+          isDislikedByUser = false;
           numOfLikes++;
           $("#like-btn").addClass("active");
+          $("#dislike-btn").removeClass("active");
+          
         }
         $("#numOfLikes").html(numOfLikes);
       }});
     });
     $("#dislike-btn").click(function(){
       $.ajax({url: "http://localhost:8888/UpvoteDownvote?disLikedByUser=true&tid=" + testimonialId, type:"POST", success: function(result){
-        if (isDislikedByUser) {
+    		if(isLikedByUser){
+           		numOfLikes--;
+           		$('#numOfLikes').text(numOfLikes);
+           	}
+    	  if (isDislikedByUser) {
           // if the testimonial was earlier liked by user then remove it
           isDislikedByUser = false;
           numOfDislikes--;
           $("#dislike-btn").removeClass("active");
         } else {
           isDislikedByUser = true;
+          isLikedByUser = false;
           numOfDislikes++;
           $("#dislike-btn").addClass("active");
+          $("#like-btn").removeClass("active");
         }
         $("#numOfDislikes").html(numOfDislikes);
       }});

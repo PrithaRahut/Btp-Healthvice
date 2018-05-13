@@ -17,7 +17,7 @@
         		</li>
       		</ul> -->
       		<ul id="nav-mobile" class="right" style="margin: 0 auto;">
-        		<li><a href="#aboutus">About Us</a></li>
+        		<li><a href="aboutUs.jsp">About Us</a></li>
         		<li><a href="TestimonialServlet">Share your experience!</a></li>
         		<li><a class='dropdown-trigger nooutline' href="#" data-target='diseaseDropDown'>Diseases</a></li>
         		<%if(u == null){ %>
