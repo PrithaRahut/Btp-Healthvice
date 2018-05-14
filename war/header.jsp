@@ -8,16 +8,16 @@
 		<nav>
 			<div class="nav-wrapper" style="box-shadow: 0px 0px 0px;">
       		<a href="index.jsp" class="brand-logo">HEALTHVICE</a>
-      		<!-- <ul id="nav-mobile" style="margin: 0 auto; padding-left: 250px;">
+      		<ul id="nav-mobile" style="margin: 0 auto; padding-left: 250px; padding-top:7px;">
       			<li>
         			<form action="SearchResult.jsp" method="post">
       					<input type="text" name="searchterm"  placeholder="Search" style="border: 1px solid grey; background-color: #ffffff; padding-left: 5px;">
-      					<button class="waves-effect waves-light btn" style="width: 100px; background-color: #ffffff; color: #1de9b6;">SEARCH</button>
+      					<!-- <button class="waves-effect waves-light btn" style="width: 100px; background-color: #ffffff; color: #1de9b6;">SEARCH</button> -->
       				</form>
         		</li>
-      		</ul> -->
+      		</ul> 
       		<ul id="nav-mobile" class="right" style="margin: 0 auto;">
-        		<li><a href="aboutUs.jsp">About Us</a></li>
+        		<li><a href="#abouts">About Us</a></li>
         		<li><a href="TestimonialServlet">Share your experience!</a></li>
         		<li><a class='dropdown-trigger nooutline' href="#" data-target='diseaseDropDown'>Diseases</a></li>
         		<%if(u == null){ %>

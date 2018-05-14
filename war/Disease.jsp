@@ -30,10 +30,10 @@
 			log("From testimonial list:" + t.getDiseaseName());
 		} */
 	}
-	HashMap<String, Integer> map = ComparisonOfPathy.comparePathyForDisease(d.getName());
-	/* List<HashMap> listmap = ComparisonOfPathy.comparePathyForDisease(d.getName());
-	HashMap<String, Integer> map1 = listmap.get(1);		//mapUpvotes
-	HashMap<String, Integer> map2 = listmap.get(2);		//mapCount */
+	//HashMap<String, Integer> map = ComparisonOfPathy.comparePathyForDisease(d.getName());
+	List<HashMap> listmap = ComparisonOfPathy.comparePathyForDisease(d.getName());
+	HashMap<String, Integer> map1 = listmap.get(0);		//mapUpvotes
+	HashMap<String, Integer> map2 = listmap.get(1);		//mapCount 
 	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -98,6 +98,9 @@
 			<div class="row" id="charts">
                 <div class = "col s6">
                     <div id="chartdiv" style="height:300px;"></div>
+                </div>
+                <div class = "col s6">
+                    <div id="chartdiv2" style="height:300px;"></div>
                 </div>
             </div>
             <br>
@@ -278,21 +281,21 @@
 	}
 </script>
 <script type="text/javascript">
-var chart = AmCharts.makeChart( "chartdiv", {
+var chart2 = AmCharts.makeChart( "chartdiv", {
       "type": "pie",
       "theme": "light",
       "dataProvider": [ {
         "pathy": "Homeopathy",
-        "count": <%=map.get("homeopathy")%>
+        "count": <%=map2.get("homeopathy")%>
       }, {
         "pathy": "Allopathy",
-        "count": <%=map.get("allopathy")%>
+        "count": <%=map2.get("allopathy")%>
       }, {
         "pathy": "Ayurveda",
-        "count": <%=map.get("ayurveda")%>
+        "count": <%=map2.get("ayurveda")%>
       }, {
           "pathy": "Naturopathy",
-          "count": <%=map.get("naturopathy")%>
+          "count": <%=map2.get("naturopathy")%>
         } ],
       "valueField": "count",
       "titleField": "pathy",
@@ -313,7 +316,7 @@ setInterval(function(){
     }
   }, 1000, 5);
     
-<%-- var chart1 = AmCharts.makeChart( "chartdiv1", {
+ var chart1 = AmCharts.makeChart( "chartdiv2", {
       "type": "pie",
       "theme": "light",
       "dataProvider": [ {
@@ -334,8 +337,24 @@ setInterval(function(){
       "export": {
         "enabled": true
       }
-    } ); --%>
+    } ); 
+ setInterval(function(){
+	    var element = document.getElementById('chartdiv2');
+	    if(element) {
+	      var anchor = element.getElementsByTagName('a')[0];
+	      if(anchor) {
+	        anchor.style.display = 'none';
+	      }
+	    }
+	  }, 1000, 5);
 
 </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115860397-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-115860397-1');
+</script>
 </html>

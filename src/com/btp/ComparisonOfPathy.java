@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ComparisonOfPathy {
-	public static HashMap<String, Integer> comparePathyForDisease(String diseaseName){
+	public static List<HashMap> comparePathyForDisease(String diseaseName){
 		//System.out.println("In comparison of pathy:" + diseaseName);
 		List<Testimonial> list = Database.getTestimonialByDisease(diseaseName);
 //		for(Testimonial t:list){
@@ -30,8 +30,8 @@ public class ComparisonOfPathy {
 		List<HashMap> listmap = new ArrayList<HashMap>();
 		listmap.add(mapUpvotes);
 		listmap.add(mapCount);
-		//return listmap;
-		return mapCount;
+		return listmap;
+		//return mapCount;
 	}
 
 }

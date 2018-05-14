@@ -13,11 +13,12 @@
 	position: relative;
 	/* background-color: #1de9b6; */
 	background-image : url(./resources/img/image_about.JPG);
+	background-size : cover;
 	background-repeat: no-repeat;
 	height : 650px;
 	width : 100%;
 	color : #ffffff;
-	height: 650px;
+	
 }
 #landing-aboutus-content{
 	text-align: center;
@@ -27,6 +28,11 @@
 	top: 50%;
 	left: 50%;
 	transform: translateX(-50%) translateY(-50%)
+}
+#vision {
+	position: relative;
+	min-height: 650px;
+	margin: 50px;
 }
 </style>
 </head>
@@ -39,6 +45,21 @@
 		<div id="landing-aboutus" class="col s12">
 			<div id="landing-aboutus-content">
 				<p><h2>We are a one-step-solution to your Health-problems</h2></p>
+			</div>
+		</div>
+		<div id="vision" class="col s12">
+			<div class="vision-content" style="text-align:center; font-size:20px;">
+				<h4>Our Vision</h4>
+				<hr style="background-color: #1de9b6; border-color: #1de9b6; width: 200px;">
+				<p>
+					We aim to serve as much as common people we can and make them aware of the major diseases and its cure.
+				</p>
+				<p>	
+					We also aim to collect the reviews and experiences shared by common people and use them to make others aware about their journey to successfully fight against the diseases.
+				</p>
+				<p>
+					We hereby want everyone to get informed about the different process and methodology practiced around the world to fight against the disease.
+				</p>
 			</div>
 		</div>
 		

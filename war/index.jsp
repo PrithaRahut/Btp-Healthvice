@@ -39,6 +39,16 @@
 		            <p>We also aim to collect the reviews and experiences shared by common people and use them to make others aware about their journey to successfully fight against the diseases. We hereby wants everyone to get informed about the different process and methodology practiced around the  world to fight against the disease.</p>
 				</div>
 			</div>
+			<div class="row">
+				<div class="col s4">
+					
+				</div>
+				<div class="col s4" style="text-align: center;">
+					<a href="aboutUs.jsp" style="font-size: 20px; color: black;">Read More</a>
+					<hr style="width: 200px; background-color: #1de9b6; border-color: #1de9b6;">
+				</div>
+				
+			</div>
 		</div>
 		<div id="share" class="col s12">
 			<div id="share-content">
@@ -78,7 +88,7 @@
 					<div class="story-section">
 						<div class="story-content">
 						<p><b>Arthiritis and frequent cold, HOMEOPATHY &nbsp; &nbsp;</b>She was suffering with pain in inter-phalangeal joints of hands and metatarsal joints of feet since last two years. She would have severe continuous pain daily...&nbsp;&nbsp;<a href="#">More</a></p>	
-						<img src=".resources/css/profile.png" style="height: 50px; width: 50px; border-radius: 50%; float: left;">				
+						<img src=".resources/img/profile.png" style="height: 50px; width: 50px; border-radius: 50%; float: left;">				
 						</div>
 						
 						
@@ -90,7 +100,7 @@
 					<div class="story-section">
 						<div class="story-content">
 						<p><b>Arthiritis and frequent cold, HOMEOPATHY &nbsp; &nbsp;</b>She was suffering with pain in inter-phalangeal joints of hands and metatarsal joints of feet since last two years. She would have severe continuous pain daily...&nbsp;&nbsp;<a href="#">More</a></p>
-						<img src=".resources/css/profile.png" style="height: 50px; width: 50px; border-radius: 50%; float: left;">						
+						<img src=".resources/img/profile.png" style="height: 50px; width: 50px; border-radius: 50%; float: left;">						
 						</div>
 						
 					</div>
@@ -166,5 +176,13 @@
 	      statusChangeCallback(response);
 	  });
   }
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115860397-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115860397-1');
 </script>
 </html>

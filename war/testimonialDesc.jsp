@@ -59,7 +59,7 @@
 			<div class="row">
 				<div class="col s3">
 					<p style="color: grey; font-size: 15px;">Testimonial ID</p>
-					<h6><a href="#"><%=t.getYear() %></a>/<a href="#"><%=t.getDiseaseName() %></a>/<%=t.getId() %></h6>
+					<h6><a href="SearchResult.jsp?searchterm=<%=t.getYear()%>"><%=t.getYear() %></a>/<a href="Disease.jsp?val=<%=t.getDiseaseName() %>"><%=t.getDiseaseName() %></a>/<%=t.getId() %></h6>
 				</div>
 			</div>
 			<div class="row">
@@ -201,5 +201,12 @@
 	  	instance_m.open();
 	}
 </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115860397-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-115860397-1');
+</script>
 </html>
